@@ -2,10 +2,12 @@
 
 ## Todo
 [x] React App Init.
+[x] Styles - styled-components.
 
 ## Install
 1. yarn create react-app ./ --template typescript
 2. yarn add react-router-dom @types/react-router-dom
+3. yarn add styled-components @types/styled-components
 N. yarn add antd
 
 
