@@ -3,6 +3,7 @@
 ## Todo
 [x] React App Init.
 [x] Styles - styled-components.
+[x] Router Component.
 
 ## Install
 1. yarn create react-app ./ --template typescript
