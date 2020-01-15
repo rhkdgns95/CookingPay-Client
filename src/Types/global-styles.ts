@@ -15,11 +15,14 @@ export const GlobalStyles = createGlobalStyle`
     body {
         border: 1px solid ${props => props.theme.redColor};
     }
-
+    #root {
+        height: 100%;
+    }
     ul, li, a, p {
         padding: 0;
         margin: 0;
         list-style: none;
         color: inherit;
+        text-decoration: inherit;
     }
 `;

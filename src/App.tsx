@@ -9,14 +9,14 @@ const App = () => (
   </BrowserRouter>
 );
 
-const LoggedOut = () => (
+const LoggedIn = () => (
     <Switch>
       <Route path={"/"} component={Home} exact />
       <Redirect to={"/"} from={"*"} />
     </Switch>
 );
 
-const LoggedIn = () => (
+const LoggedOut = () => (
   <Switch>
     <Route path={"/"} component={Login} exact/>
     <Redirect to={"/"} from={"*"} />
