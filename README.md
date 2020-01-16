@@ -5,11 +5,20 @@
 [x] Styles - styled-components.
 [x] Router Component.
 [x] Login Form.
+[x] ApolloProvider, AppProvider - AppMessage, AppProgress.
+[] Codegen.
+[] Apollo Local Resolvers - LoggedIn,LoggedOut.
 
 ## Install
 1. yarn create react-app ./ --template typescript
 2. yarn add react-router-dom @types/react-router-dom
 3. yarn add styled-components @types/styled-components
+4. yarn add graphql apollo-boost react-apollo apollo-client
+5. yarn add @apollo/client   
+: Apollo v.3.0부터 변경됨. - InmemoryCache, ApolloClient  
+: * 참고 https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/
+: 하지만 라이브러리 의존성문제인지 ApolloProvider에 대한 에러가 뜸.
+: 다시 react-apollo로 변경하여 사용함.
 N. yarn add antd
 
 

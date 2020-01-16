@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styled from "../../Styles/typed-components";
 import InputText from "../../Components/InputText";
 import { Link } from "react-router-dom";
+import { useQuery, useLazyQuery } from "react-apollo";
+import { EMAIL_SIGN_IN } from "./LoginQueries";
+import { useAppContext } from "../../Components/App/AppProvider";
 
-const useFetch = () => {
+const useInput = () => {
     const [value, setValue] = useState<string>('');
-
     const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
         const { target: { value }} = event;
         setValue(value);
@@ -13,24 +15,92 @@ const useFetch = () => {
 
     return {
         value,
-        onChange
-    }
+        onChange,
+    };
 }
+const useFetch = () => {
+    const { handleMessages, progress, handleProgress, progressTimeOut } = useAppContext();
+    const inputEmail = useInput();
+    const inputPassword = useInput();
+
+    const [ loginQuery ] = useLazyQuery(EMAIL_SIGN_IN, {
+        fetchPolicy: "network-only",
+        onCompleted: data => {
+            const { EmailSignIn: { ok, error } } = data;
+            if(progress) {
+                setTimeout(() => {
+                    if(ok) {
+                        handleMessages({
+                            ok,
+                            text: "성공"
+                        });
+                    } else {
+                        handleMessages({
+                            ok,
+                            text: error
+                        });
+                    }    
+                    handleProgress(false);
+                }, progressTimeOut);
+            }
+        },
+        onError: data => {
+            console.log('EmailSignIn onError: ', data);
+            if(progress) {
+                setTimeout(() => {
+                    handleMessages({
+                        ok: false,
+                        text: data.message
+                    })
+                }, progressTimeOut);
+            }
+        }
+    });
+    
+    const handleLogin = () => {
+        const email = inputEmail.value;
+        const password = inputPassword.value;
+
+        if(email.length > 0 && password.length > 0) {
+            if(!progress) {
+                handleProgress(true);
+                loginQuery({
+                    variables: {
+                        email,
+                        password
+                    }
+                });
+            }
+        }
+    }
+
+    return {
+        inputEmail,
+        inputPassword,
+        handleLogin
+    };
+
+};
+
 const Login = () => {
-    const email = useFetch();
-    const password = useFetch();
+    const { inputEmail, inputPassword, handleLogin } = useFetch();
     
     return (
         <Container>
             <Wrapper>
-                <LoginForm>
-                    <InputText type={"text"} label={"이메일"} id={"email"} value={email.value} onChange={email.onChange} />
-                    <InputText type={"password"} label={"패스워드"} id={"password"} value={password.value} onChange={password.onChange} />
+                <LoginForm onSubmit={
+                    e => {
+                        e.preventDefault();
+                        handleLogin();
+                    }
+                }>
+                    <InputText type={"text"} label={"이메일"} id={"email"} value={inputEmail.value} onChange={inputEmail.onChange} />
+                    <InputText type={"password"} label={"패스워드"} id={"password"} value={inputPassword.value} onChange={inputPassword.onChange} />
                     <Linkbar>
                         <LinkButton to={"/"}>Sign up</LinkButton>
                         <LinkButton to={"/"}>Find account</LinkButton>
                     </Linkbar>
-                    <LoginButton type={'button'} value={"Login"} />
+                    <LoginButton type={'submit'} value={"Login"}/>
                 </LoginForm>
             </Wrapper>
         </Container>
@@ -50,7 +120,8 @@ const Wrapper = styled.div`
     align-items: center;
 `;
 
-const LoginForm = styled.div`
+const LoginForm = styled.form`
+    background-color: white;
     width: 90%;
     max-width: 500px;
     padding: 30px 10px;
