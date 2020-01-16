@@ -6,6 +6,7 @@
 [x] Router Component.
 [x] Login Form.
 [x] ApolloProvider, AppProvider - AppMessage, AppProgress.
+[x] Bug Fixed.
 [] Codegen.
 [] Apollo Local Resolvers - LoggedIn,LoggedOut.
 

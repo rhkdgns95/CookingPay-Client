@@ -51,7 +51,8 @@ const useFetch = () => {
                     handleMessages({
                         ok: false,
                         text: data.message
-                    })
+                    });
+                    handleProgress(false);
                 }, progressTimeOut);
             }
         }
