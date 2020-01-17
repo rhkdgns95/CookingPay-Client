@@ -11,6 +11,14 @@
 [x] HOC - Apollo Local Resolvers - LoggedIn,LoggedOut.
 [x] Codegen.
 [x] UserProvider - Logout, GetMyProfile, NavBar
+[x] Navbar.
+[] Post.
+[] User Create Post.
+[] User Donate.
+[] Manager Check Others.
+
+
+
 
 ## Install
 1. yarn create react-app ./ --template typescript

@@ -8,6 +8,7 @@ import AppProgress from "../AppProgress";
 import { graphql } from "react-apollo";
 import { IS_LOGGED_IN, LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
+import Post from "../../Routes/Post";
 
 
 const App = ({
@@ -31,6 +32,7 @@ const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => (
 const LoggedIn = () => (
     <Switch>
       <Route path={"/"} component={Home} exact />
+      <Route path={"/post"} component={Post} />
       <Redirect to={"/"} from={"*"} />
     </Switch>
 );

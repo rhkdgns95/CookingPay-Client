@@ -7,6 +7,7 @@ import { EMAIL_SIGN_IN } from "./LoginQueries";
 import { useAppContext } from "../../Components/App/AppProvider";
 import { LOGGED_IN } from "./LoginQueries.local";
 import { emailSignInVariables, emailSignIn } from "../../Types/api";
+import NavBar from "../../Components/NavBar";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
@@ -29,6 +30,8 @@ const useFetch = () => {
     const { handleMessages, progress, handleProgress, progressTimeOut } = useAppContext();
     const inputEmail = useInput(progress);
     const inputPassword = useInput(progress);
+    const [isForm, setIsForm] = useState<boolean>(false);
+
     const [ loginMutation ] = useMutation(LOGGED_IN);
 
     const [ loginQuery ] = useLazyQuery<emailSignIn, emailSignInVariables>(EMAIL_SIGN_IN, {
@@ -88,34 +91,40 @@ const useFetch = () => {
             }
         }
     }
-
+    const toggleForm = () => {
+        setIsForm(!isForm);
+    }
     return {
         inputEmail,
         inputPassword,
-        handleLogin
+        handleLogin,
+        isForm,
+        toggleForm
     };
 
 };
 
 const Login = () => {
-    const { inputEmail, inputPassword, handleLogin } = useFetch();
+    const { inputEmail, inputPassword, handleLogin, isForm, toggleForm } = useFetch();
     
     return (
         <Container>
+            <NavBar toggleLogin={toggleForm}/>
             <Wrapper>
-                <LoginForm onSubmit={
-                    e => {
+                <LoginForm 
+                    className={isForm ? "active" : ""}
+                    onSubmit={ e => {
                         e.preventDefault();
                         handleLogin();
                     }
                 }>
-                    <InputText type={"text"} label={"이메일"} id={"email"} { ...inputEmail } />
-                    <InputText type={"password"} label={"패스워드"} id={"password"} { ...inputPassword } />
+                    <InputText type={"text"} label={"이메일"} id={"email"} { ...inputEmail } disabled={!isForm} />
+                    <InputText type={"password"} label={"패스워드"} id={"password"} { ...inputPassword } disabled={!isForm}/>
                     <Linkbar>
                         <LinkButton to={"/"}>Sign up</LinkButton>
                         <LinkButton to={"/"}>Find account</LinkButton>
                     </Linkbar>
-                    <LoginButton type={'submit'} value={"Login"}/>
+                    <LoginButton type={'submit'} value={"Login"} disabled={!isForm}/>
                 </LoginForm>
             </Wrapper>
         </Container>
@@ -136,12 +145,24 @@ const Wrapper = styled.div`
 `;
 
 const LoginForm = styled.form`
+    position: relative;
     background-color: white;
     width: 90%;
     max-width: 500px;
     padding: 30px 10px;
     border-radius: 6px;
     box-shadow: 1px 2px 4px rgba(0,0,0,.24), -1px -2px 4px rgba(0,0,0,.14);
+    transform: scale(0);
+    
+    opacity: .5;
+    transition-timing-function: ease-in-out;
+    z-index: -1;
+    &.active {
+        transform: scale(1);
+        opacity: 1;
+        z-index: 1;
+        transition: .3s;
+    }
 `;
 
 const Linkbar = styled.div`

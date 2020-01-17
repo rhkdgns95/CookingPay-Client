@@ -41,6 +41,7 @@ interface IProps {
     value: string;
     type: "text" | "password";
     onChange: React.ChangeEventHandler<HTMLInputElement>;
+    disabled?: boolean;
 }
 
 const InputText: React.FC<IProps> = ({
@@ -48,12 +49,12 @@ const InputText: React.FC<IProps> = ({
     label,
     value,
     type,
-    onChange
+    onChange,
+    disabled=false
 }) => (
     <Container>
         <Wrapper>
-            <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value}/>
-            <FormLabel htmlFor={`login_form_${id}`}>{ label }</FormLabel>
+            <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value} disabled={disabled}/>            <FormLabel htmlFor={`login_form_${id}`}>{ label }</FormLabel>
         </Wrapper>
     </Container>
 );
