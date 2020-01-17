@@ -7,6 +7,7 @@
 [x] Login Form.
 [x] ApolloProvider, AppProvider - AppMessage, AppProgress.
 [x] Bug Fixed.
+[x] Progress - form disabled onChange.
 [] Codegen.
 [] Apollo Local Resolvers - LoggedIn,LoggedOut.
 

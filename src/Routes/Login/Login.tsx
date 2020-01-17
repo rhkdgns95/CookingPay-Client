@@ -6,11 +6,15 @@ import { useQuery, useLazyQuery } from "react-apollo";
 import { EMAIL_SIGN_IN } from "./LoginQueries";
 import { useAppContext } from "../../Components/App/AppProvider";
 
-const useInput = () => {
+const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
+
     const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-        const { target: { value }} = event;
-        setValue(value);
+        // progress중인 경우 변경 X
+        if(!progress) { 
+            const { target: { value }} = event;
+            setValue(value);
+        }
     }
 
     return {
@@ -18,10 +22,11 @@ const useInput = () => {
         onChange,
     };
 }
+
 const useFetch = () => {
     const { handleMessages, progress, handleProgress, progressTimeOut } = useAppContext();
-    const inputEmail = useInput();
-    const inputPassword = useInput();
+    const inputEmail = useInput(progress);
+    const inputPassword = useInput(progress);
 
     const [ loginQuery ] = useLazyQuery(EMAIL_SIGN_IN, {
         fetchPolicy: "network-only",
@@ -95,8 +100,8 @@ const Login = () => {
                         handleLogin();
                     }
                 }>
-                    <InputText type={"text"} label={"이메일"} id={"email"} value={inputEmail.value} onChange={inputEmail.onChange} />
-                    <InputText type={"password"} label={"패스워드"} id={"password"} value={inputPassword.value} onChange={inputPassword.onChange} />
+                    <InputText type={"text"} label={"이메일"} id={"email"} { ...inputEmail } />
+                    <InputText type={"password"} label={"패스워드"} id={"password"} { ...inputPassword } />
                     <Linkbar>
                         <LinkButton to={"/"}>Sign up</LinkButton>
                         <LinkButton to={"/"}>Find account</LinkButton>
