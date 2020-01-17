@@ -1,5 +1,7 @@
-import { InMemoryCache, HttpLink, ApolloClient } from "apollo-boost";
-
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloLink } from "apollo-link"; 
 // import { ApolloClient, HttpLink, ApolloLink, Operation, InMemoryCache  } from "@apollo/client";
 
 const uri: string = "http://localhost:4000/graphql";
@@ -12,26 +14,28 @@ cache.writeData({
     data: {
         auth: {
             __typename: "Auth",
-            isLoggedIn: getToken()
+            isLoggedIn: Boolean(getToken())
         }
     }
 });
 
-const link = new HttpLink({
+const httpLink = createHttpLink({
     uri,
     headers: {
-        "X-jWT": getToken()
+        "X-JWT": getToken()
     }
 });
 
-// const authMiddleware = new ApolloLink((operation: Operation, forward: any) => {
-//     operation.setContext({
-//         headers: {
-//             "X-JWT": getToken()
-//         }
-//     });
-//     return forward();
-// });
+const authMiddleware = new ApolloLink((operation, forward: any) => {
+    
+    operation.setContext({
+        headers: {
+            "X-JWT": getToken()
+        }
+    });
+    return forward(operation);
+});
+const link = authMiddleware.concat(httpLink);
 
 const client = new ApolloClient({
     cache,
@@ -40,7 +44,7 @@ const client = new ApolloClient({
         Mutation: {
             UserLoggedIn: (_, { token }, { cache: currentCache }) => {
                 localStorage.setItem('x-jwt', token);
-                console.log("LOGGEx`D_IN: ", token);
+                // console.log("LOGGEx`D_IN: ", token);
                 currentCache.writeData({
                     data: {
                         auth: {

@@ -7,6 +7,7 @@ import AppMessage from "../AppMessage";
 import AppProgress from "../AppProgress";
 import { graphql } from "react-apollo";
 import { IS_LOGGED_IN, LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
+import User from "../User";
 
 
 const App = ({
@@ -23,7 +24,7 @@ const App = ({
 
 const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => (
   <BrowserRouter>
-      { isLoggedIn ? <LoggedIn/>: <LoggedOut/> }
+      { isLoggedIn ? <User><LoggedIn/></User>: <LoggedOut/> }
   </BrowserRouter>
 );
 

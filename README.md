@@ -9,7 +9,8 @@
 [x] Bug Fixed.
 [x] Progress - form disabled onChange.
 [x] HOC - Apollo Local Resolvers - LoggedIn,LoggedOut.
-[] Codegen.
+[x] Codegen.
+[x] UserProvider - Logout, GetMyProfile, NavBar
 
 ## Install
 1. yarn create react-app ./ --template typescript
@@ -21,7 +22,8 @@
 : * 참고 https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/
 : 하지만 라이브러리 의존성문제인지 ApolloProvider에 대한 에러가 뜸.
 : 다시 react-apollo로 변경하여 사용함.
-6. yarn add apollo
+6. yarn add apollo 
+7. yarn add apollo-link-http apollo-link apollo-cache-inmemory
 N. yarn add antd
 
 
