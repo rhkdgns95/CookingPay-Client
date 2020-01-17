@@ -24,11 +24,9 @@ const AppMessage = () => {
                 ref.current = setTimeout(() => {
                     setLoad(true);
                 }, 100);
-                console.log("useEffect");
             }
         }
     }, [messages]);
-    console.log("AppMessages");
     return (
         <Container onLoad={e => console.log("E2: ", e)}>
             <Wrapper>

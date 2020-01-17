@@ -5,19 +5,25 @@ import Login from "../../Routes/Login";
 import AppProvider from "./AppProvider";
 import AppMessage from "../AppMessage";
 import AppProgress from "../AppProgress";
+import { graphql } from "react-apollo";
+import { IS_LOGGED_IN, LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 
 
-const App = () => (
-  <AppProvider>
-    <AppPresenter/>
-    <AppMessage/>
-    <AppProgress text={"Loading"}/>
-  </AppProvider>    
-);
+const App = ({
+  data: {auth: { isLoggedIn }}
+}: any) => {
+  return (
+    <AppProvider>
+      <AppPresenter isLoggedIn={isLoggedIn}/>
+      <AppMessage/>
+      <AppProgress text={"Loading"}/>
+    </AppProvider>    
+  );
+}
 
-const AppPresenter = () => (
+const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => (
   <BrowserRouter>
-      { false ? <LoggedIn/>: <LoggedOut/> }
+      { isLoggedIn ? <LoggedIn/>: <LoggedOut/> }
   </BrowserRouter>
 );
 
@@ -35,4 +41,4 @@ const LoggedOut = () => (
   </Switch>
 );
 
-export default App;
+export default graphql<any, any>(IS_LOGGED_IN)(App);

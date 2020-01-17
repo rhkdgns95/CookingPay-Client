@@ -8,8 +8,8 @@
 [x] ApolloProvider, AppProvider - AppMessage, AppProgress.
 [x] Bug Fixed.
 [x] Progress - form disabled onChange.
+[x] HOC - Apollo Local Resolvers - LoggedIn,LoggedOut.
 [] Codegen.
-[] Apollo Local Resolvers - LoggedIn,LoggedOut.
 
 ## Install
 1. yarn create react-app ./ --template typescript

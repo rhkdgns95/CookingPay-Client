@@ -12,7 +12,7 @@ cache.writeData({
     data: {
         auth: {
             __typename: "Auth",
-            isLoggedIn: Boolean(getToken())
+            isLoggedIn: getToken()
         }
     }
 });
@@ -38,9 +38,10 @@ const client = new ApolloClient({
     link,
     resolvers: {
         Mutation: {
-            UserLoggedIn: (_, { token }, { cache }) => {
+            UserLoggedIn: (_, { token }, { cache: currentCache }) => {
                 localStorage.setItem('x-jwt', token);
-                cache.writeData({
+                console.log("LOGGEx`D_IN: ", token);
+                currentCache.writeData({
                     data: {
                         auth: {
                             __typename: "Auth",
