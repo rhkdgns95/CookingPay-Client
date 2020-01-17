@@ -6,6 +6,7 @@ import { useLazyQuery, useApolloClient, useMutation } from "react-apollo";
 import { EMAIL_SIGN_IN } from "./LoginQueries";
 import { useAppContext } from "../../Components/App/AppProvider";
 import { LOGGED_IN } from "./LoginQueries.local";
+import { emailSignInVariables, emailSignIn } from "../../Types/api";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
@@ -30,10 +31,10 @@ const useFetch = () => {
     const inputPassword = useInput(progress);
     const [ loginMutation ] = useMutation(LOGGED_IN);
 
-    const [ loginQuery ] = useLazyQuery(EMAIL_SIGN_IN, {
+    const [ loginQuery ] = useLazyQuery<emailSignIn, emailSignInVariables>(EMAIL_SIGN_IN, {
         fetchPolicy: "cache-and-network",
         onCompleted: data => {
-            const { EmailSignIn: { ok, error, token } } = data;
+            const { EmailSignIn: { ok, error, token }} = data;
             if(progress) {
                 setTimeout(() => {
                     if(ok && token) {
