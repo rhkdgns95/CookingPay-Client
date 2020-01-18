@@ -44,5 +44,8 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
     @media(max-width: 510px) {
+        .row {
+            width: 95%;
+        }
     }
 `;

@@ -68,6 +68,20 @@ const PostGroup = styled.div`
         width: 30%;
         margin: 10px 10px;
     }
+    @media(max-width: 910px) {
+        & > div {
+            width: 45%;
+        }
+    }
+    @media(max-width: 510px) {
+        justify-content: space-between;
+        & > div {
+            width: 49%;
+            margin: 0;
+            margin-bottom: 7.5px;
+            align-items: center;
+        }
+    }
 `;
 
 

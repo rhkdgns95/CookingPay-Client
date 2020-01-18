@@ -13,7 +13,12 @@
 [x] UserProvider - Logout, GetMyProfile, NavBar
 [x] Navbar.
 [x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
-[] Navbar - Mobile
+[x] Navbar - Mobile
+## Todo <예정사항>
+[] Post 자세히 보기.
+[] Post 분류별 보기로 나눠놓기.
+[] 파일 업로드.
+[] 기부하기.
 [] Post.
 [] User Create Post.
 [] User Donate.

@@ -53,7 +53,7 @@ const FormPost = () => {
                         }
                     }
                 }}>
-                    <InputText label={"제목"} id={"title"} {...formTitle } type={"text"} />
+                    <InputText label={"제목"} id={"title"} {...formTitle } type={"text"}/>
                     <InputText label={"내용"} id={"description"} { ...formDescription } type={"textarea"} />
                     <SubmitButton type={"submit"} value={"Submit"} />
                 </Form>

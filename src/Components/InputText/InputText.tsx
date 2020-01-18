@@ -72,7 +72,7 @@ const InputText: React.FC<IProps> = ({
             {
                 type === "textarea" ?
                 <FormTextArea id={`login_form_${id}`} onChange={onChange} value={value} disabled={disabled} style={{resize: "none"}}/> :
-                <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value} disabled={disabled}/>
+                <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value} disabled={disabled} autoComplete={"off"}/>
             }
             
             <FormLabel htmlFor={`login_form_${id}`}>{ label }</FormLabel>

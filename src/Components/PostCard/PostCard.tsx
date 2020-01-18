@@ -61,6 +61,11 @@ const PhotoBox = styled.div`
         // height: 100%;
         // 
     }
+    @media(max-width: 510px) {
+        .post-effect {
+            display: none;
+        }
+    }
     &:hover {
         .post-effect {
             & > div {
@@ -140,6 +145,9 @@ const PhotoDate = styled.span`
     color: white;
     font-size: 12px;
     text-shadow: 0 1px 1px rgba(0,0,0,.94);
+    @media(max-width: 510px) {
+        font-size: 10px;
+    }
 `;
 const PhotoText = styled.div`
     position: absolute;
@@ -148,10 +156,20 @@ const PhotoText = styled.div`
     transform: translate(-50%, -50%);
     color: white;
     text-shadow: 0 1px 1px rgba(0,0,0,.94);
+    width: 100%;
+    @media(max-width: 510px) {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: translate(0);
+        background-color: #183e70;
+        color: white;
+        padding-bottom: 22px;
+    }
 `;
 const Title = styled.h5`
-    white-space: nowrap;
     position: relative;
+    white-space: nowrap;
     text-align: center;
     margin: 0 auto;
     margin-bottom: 7px;
@@ -161,19 +179,35 @@ const Title = styled.h5`
     width: 100%;
     max-width: 150px;
     text-shadow: 0 1px 1px rgba(0,0,0,.94);
+    @media(max-width: 910px) {
+        max-width: 90%;
+    }
+    @media(max-width: 510px) {
+        text-align: left;
+        font-size: 12px;
+        padding-top: 5px;
+    }
 `;
 const Description = styled.p`
     position: relative;
     white-space: nowrap;
     position: relative;
     text-align: center;
+    margin: 0 auto;
     margin-bottom: 7px;
-    display: inline-block;
+    display: block;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 100%;
     max-width: 200px;
     text-shadow: 0 1px 1px rgba(0,0,0,.94);
+    @media(max-width: 910px) {
+        max-width: 90%;
+    }
+    @media(max-width: 510px) {
+        text-align: left;
+        font-size: 11px;
+    }
 `;
 
 export default PostCard;
