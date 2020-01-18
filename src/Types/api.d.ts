@@ -53,6 +53,72 @@ export interface emailSignInVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getAllPost
+// ====================================================
+
+export interface getAllPost_GetAllPost_posts_photoUrls {
+  __typename: "PostImage";
+  id: number;
+  url: string;
+  postId: number | null;
+}
+
+export interface getAllPost_GetAllPost_posts_writer {
+  __typename: "User";
+  name: string;
+}
+
+export interface getAllPost_GetAllPost_posts {
+  __typename: "Post";
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+  photoUrls: (getAllPost_GetAllPost_posts_photoUrls | null)[] | null;
+  writer: getAllPost_GetAllPost_posts_writer;
+}
+
+export interface getAllPost_GetAllPost {
+  __typename: "GetAllPostResponse";
+  ok: boolean;
+  error: string | null;
+  posts: (getAllPost_GetAllPost_posts | null)[] | null;
+}
+
+export interface getAllPost {
+  GetAllPost: getAllPost_GetAllPost;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: createPost
+// ====================================================
+
+export interface createPost_CreatePost {
+  __typename: "CreatePostResponse";
+  ok: boolean;
+  error: string | null;
+  postId: number | null;
+}
+
+export interface createPost {
+  CreatePost: createPost_CreatePost;
+}
+
+export interface createPostVariables {
+  title: string;
+  description: string;
+  photoUrls?: (string | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: UserItem
 // ====================================================
 
@@ -61,6 +127,37 @@ export interface UserItem {
   id: number;
   name: string;
   email: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: PostItem
+// ====================================================
+
+export interface PostItem {
+  __typename: "Post";
+  id: number;
+  title: string;
+  description: string;
+  createdAt: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: PostImageItem
+// ====================================================
+
+export interface PostImageItem {
+  __typename: "PostImage";
+  id: number;
+  url: string;
+  postId: number | null;
 }
 
 /* tslint:disable */

@@ -12,6 +12,8 @@
 [x] Codegen.
 [x] UserProvider - Logout, GetMyProfile, NavBar
 [x] Navbar.
+[x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
+[] Navbar - Mobile
 [] Post.
 [] User Create Post.
 [] User Donate.
@@ -33,6 +35,13 @@
 6. yarn add apollo 
 7. yarn add apollo-link-http apollo-link apollo-cache-inmemory
 N. yarn add antd
+
+
+### 1. Study
+[1-0] fragment 사용시
+: Fragment를 여러개 사용시 하나의 테이블을 독립적으로 사용하도록 해야함.
+: 하나의 테이블의 종류를 분리사용하는것 가능함.
+: 두개의 테이블의 Fragment를 구성하면 실행 안됨.
 
 
 <!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

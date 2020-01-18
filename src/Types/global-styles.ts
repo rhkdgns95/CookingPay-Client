@@ -24,14 +24,25 @@ export const GlobalStyles = createGlobalStyle`
         color: inherit;
         text-decoration: inherit;
     }
+    h1, h2, h3, h4, h5 {
+        margin: 0;
+    }
     .row {
-        max-width: 1000px;
+        max-width: 900px;
         width: 100%;
         margin: 0 auto;
     }
-    @media(max-width: 510px) {
+    button {
+        &:focus, 
+        &:active {
+            outline: 0;
+        }
+    }
+    @media(max-width: 910px) {
         .row {
             width: 90%;
         }
+    }
+    @media(max-width: 510px) {
     }
 `;

@@ -28,7 +28,22 @@ const FormInput = styled.input`
         }
     }
 `;
-
+const FormTextArea = styled.textarea`
+    width: 100%;
+    padding: 7.5px 10px;
+    border-radius: 3px;
+    border: 1px solid #dfdfdf;
+    outline: none;
+    height: 350px;
+    &:focus,
+    &:hover {
+        outline: none;
+        & ~ label {
+            color: #7782ba;
+            transition: .2s;
+        }
+    }
+`;
 const FormLabel = styled.label`
     width: 100%;
     color: #94a5bb;
@@ -39,8 +54,8 @@ interface IProps {
     id: string;
     label: string;
     value: string;
-    type: "text" | "password";
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+    type: "text" | "password" | "textarea";
+    onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
     disabled?: boolean;
 }
 
@@ -54,7 +69,13 @@ const InputText: React.FC<IProps> = ({
 }) => (
     <Container>
         <Wrapper>
-            <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value} disabled={disabled}/>            <FormLabel htmlFor={`login_form_${id}`}>{ label }</FormLabel>
+            {
+                type === "textarea" ?
+                <FormTextArea id={`login_form_${id}`} onChange={onChange} value={value} disabled={disabled} style={{resize: "none"}}/> :
+                <FormInput id={`login_form_${id}`} type={type} onChange={onChange} value={value} disabled={disabled}/>
+            }
+            
+            <FormLabel htmlFor={`login_form_${id}`}>{ label }</FormLabel>
         </Wrapper>
     </Container>
 );

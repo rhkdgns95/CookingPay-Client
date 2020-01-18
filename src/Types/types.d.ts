@@ -10,3 +10,8 @@ interface IAppMessage {
     ok: boolean;
     text: string | null;
 }
+
+interface IUseInputText {
+    value: string;
+    onChange: React.ChangeEventHandler<HTMLInputElement> = () => any;
+}
