@@ -17,6 +17,7 @@
 [x] Post - fileUpload(Drag - Drop / Click)
 [x] Post - Preview
 [x] Post - Preview Pagination
+[x] SignUp, apollo.ts - production/deploy
 
 ## Todo <예정사항>
 [] Post 자세히 보기.

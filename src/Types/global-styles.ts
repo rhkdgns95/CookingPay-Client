@@ -11,8 +11,10 @@ export const GlobalStyles = createGlobalStyle`
     }
     html {
         background-color: ${props => props.theme.bgColor};
+        overflow-y: scroll;
     }
     body {
+        
     }
     #root {
         height: 100%;

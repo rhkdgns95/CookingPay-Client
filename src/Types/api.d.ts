@@ -119,10 +119,35 @@ export interface createPostVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: UserItem
+// GraphQL mutation operation: emailSignUp
 // ====================================================
 
-export interface UserItem {
+export interface emailSignUp_EmailSignUp {
+  __typename: "EmailSignUpResponse";
+  ok: boolean;
+  error: string | null;
+  token: string | null;
+}
+
+export interface emailSignUp {
+  EmailSignUp: emailSignUp_EmailSignUp;
+}
+
+export interface emailSignUpVariables {
+  name: string;
+  password: string;
+  email: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: ItemUser
+// ====================================================
+
+export interface ItemUser {
   __typename: "User";
   id: number;
   name: string;
@@ -134,10 +159,10 @@ export interface UserItem {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: PostItem
+// GraphQL fragment: ItemPost
 // ====================================================
 
-export interface PostItem {
+export interface ItemPost {
   __typename: "Post";
   id: number;
   title: string;
@@ -150,10 +175,10 @@ export interface PostItem {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: PostImageItem
+// GraphQL fragment: ItemPostImage
 // ====================================================
 
-export interface PostImageItem {
+export interface ItemPostImage {
   __typename: "PostImage";
   id: number;
   url: string;

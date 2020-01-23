@@ -5,6 +5,7 @@ import { useAppContext } from "../../Components/App/AppProvider";
 import { usePostContext } from "../../Routes/Post/PostProvider";
 import InputFile from "../../Components/InputFile";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const CloudinaryName: string = "dljwleqvc";
@@ -259,8 +260,8 @@ const FormPost = () => {
                                 }
                             </ModalGroup>
                             <ModalButtonGroup className={isUploaded === "uploaded" ? "active" : ""}>
-                                <ModalButton value={"Home"} onClick={e => alert("Wait..")} type={"button"}/>
-                                <ModalButton value={"Go Post"} onClick={e => alert("Wait..")} type={"button"}/>
+                                <ModalButton to={"/"}>Home</ModalButton>
+                                <ModalButton to={"/post"}>Post</ModalButton>
                             </ModalButtonGroup>
                         </ModalWrapper>
                     </Modal>
@@ -427,7 +428,7 @@ const ModalButtonGroup = styled.div`
     }
 `;
 
-const ModalButton = styled.input`
+const ModalButton = styled(Link)`
     display: flex;
     width: 50%;
     justify-content: center;

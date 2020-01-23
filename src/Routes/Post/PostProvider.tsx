@@ -1,6 +1,6 @@
 import React, { useContext, createContext, useState } from "react";
 import { useMutation, useQuery } from "react-apollo";
-import { createPost, createPostVariables, getAllPost, PostItem, getAllPost_GetAllPost_posts } from "../../Types/api";
+import { createPost, createPostVariables, getAllPost, getAllPost_GetAllPost_posts } from "../../Types/api";
 import { CREATE_POST, GET_POSTS } from "./PostQueries";
 import { useAppContext } from "../../Components/App/AppProvider";
 

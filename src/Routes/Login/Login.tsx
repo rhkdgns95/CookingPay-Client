@@ -121,7 +121,7 @@ const Login = () => {
                     <InputText type={"text"} label={"이메일"} id={"email"} { ...inputEmail } disabled={!isForm} />
                     <InputText type={"password"} label={"패스워드"} id={"password"} { ...inputPassword } disabled={!isForm}/>
                     <Linkbar>
-                        <LinkButton to={"/"}>Sign up</LinkButton>
+                        <LinkButton to={"/signup"}>Sign up</LinkButton>
                         <LinkButton to={"/"}>Find account</LinkButton>
                     </Linkbar>
                     <LoginButton type={'submit'} value={"Login"} disabled={!isForm}/>

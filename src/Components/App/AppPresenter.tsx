@@ -9,6 +9,7 @@ import { graphql } from "react-apollo";
 import { IS_LOGGED_IN, LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
 import Post from "../../Routes/Post";
+import SignUp from "../../Routes/SignUp";
 
 
 const App = ({
@@ -40,6 +41,7 @@ const LoggedIn = () => (
 const LoggedOut = () => (
   <Switch>
     <Route path={"/"} component={Login} exact/>
+    <Route path={"/signup"} component={SignUp} />
     <Redirect to={"/"} from={"*"} />
   </Switch>
 );
