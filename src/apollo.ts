@@ -5,7 +5,7 @@ import { ApolloLink } from "apollo-link";
 // import { ApolloClient, HttpLink, ApolloLink, Operation, InMemoryCache  } from "@apollo/client";
 
 const PRODUCTION_URL: string = "http://ec2-18-212-24-8.compute-1.amazonaws.com:4000/graphql";
-const uri: string = process.env.NODE_ENV !== "production" ? PRODUCTION_URL : "http://localhost:4000/graphql";
+const uri: string = process.env.NODE_ENV === "production" ? PRODUCTION_URL : "http://localhost:4000/graphql";
 
 const getToken = () => localStorage.getItem("x-jwt") || "";
 
