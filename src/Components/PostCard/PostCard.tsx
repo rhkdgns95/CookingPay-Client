@@ -47,7 +47,12 @@ const PostCard: React.FC<IProps> = ({
                         }
                         { name }
                     </PhotoProfile>
-                    <PhotoTitle>{ title }</PhotoTitle>
+                    <PhotoTitle>
+                        { title }
+                        <CursorNumber>
+                            { cursor + 1 } / { imgSrc.length }
+                        </CursorNumber>
+                    </PhotoTitle>
                     <PhotoBox>
                         <PhotoScreen cursor={cursor} length={imgSrc.length}>
                             {
@@ -82,7 +87,16 @@ const PostCard: React.FC<IProps> = ({
                             
                         </>
                     </PhotoBox>
-                    <PhotoDate>{ createdAt }</PhotoDate>
+                    <PhotoDate>
+                        <PhotoPagination>
+                            {
+                                imgSrc.map((_, key) => 
+                                    <PhotoPaginationItem className={key === cursor ? "active" : ""} key={key} onClick={e => handleCursor(key)}/>
+                                )
+                            }
+                        </PhotoPagination>
+                        { createdAt }
+                    </PhotoDate>
                     <Description>{ description }</Description>
                 </Card>
             </Wrapper>
@@ -121,10 +135,17 @@ const UserImage = styled.img`
     height: 30px;
 `;
 const PhotoTitle = styled.h5`
+    position: relative;
     background-color: black;
     color: white;
     text-align: center;
     padding: 10px;
+`;
+const CursorNumber = styled.span`
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
 `;
 const PhotoBox = styled.div`
     position: relative;
@@ -147,6 +168,9 @@ const PhotoBox = styled.div`
                 }
             }
         }
+    }
+    @media(max-width: 510px) {
+        min-height: 410px;
     }
 `;
 interface IPhotoScreen {
@@ -179,6 +203,7 @@ const PhotoImg = styled.img`
     margin: 0 auto;
 `;
 const PhotoDate = styled.p`
+    position: relative;
     font-size: 13px;
     padding: 10px;
     text-align: right;
@@ -206,13 +231,18 @@ const Side = styled.div`
         cursor: pointer;
         padding: 5px;
         border-radius: 50%;
-        background-color: black;
-        fill: white;
+        background-color: rgba(250,250,250,.4);
+        fill: black;
     }
+    
     @media(min-width: 911px) {
         opacity: 0;
         &:hover {
             background-color: rgba(250,250,250,.1);
+        }
+        & svg {
+            background-color: black;
+            fill: white;
         }
     }
 `;
@@ -229,6 +259,30 @@ const RightSide = styled(Side)`
     right: 0;
     @media(min-width: 911px) {
         transform: translateX(100%);
+    }
+`;
+
+const PhotoPagination = styled.span`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 100px;
+    flex-flow: row wrap;
+`;
+
+const PhotoPaginationItem = styled.span`
+    background-color: white;
+    padding: 3px;
+    margin: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .2s;
+    &.active {
+        background-color: #cdea2d;
     }
 `;
 export default PostCard;

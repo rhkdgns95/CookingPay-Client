@@ -16,6 +16,7 @@
 [x] Navbar - Mobile
 [x] Post - fileUpload(Drag - Drop / Click)
 [x] Post - Preview
+[x] Post - Preview Pagination
 
 ## Todo <예정사항>
 [] Post 자세히 보기.
