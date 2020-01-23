@@ -23,7 +23,8 @@ const usePostContext = () => useContext(PostContext);
 
 const useFetch = (): { value: IContext } => {
     const { progress, handleProgress, handleMessages, progressTimeOut } = useAppContext();
-    const [tab, setStep] = useState<number>(0);
+    const [tab, setStep] = useState<number>(1);
+
     const { data, loading } = useQuery<getAllPost, void>(GET_POSTS, {
         fetchPolicy: "cache-and-network",
         onCompleted: data => {
@@ -35,7 +36,6 @@ const useFetch = (): { value: IContext } => {
     });
 
     const posts: Array<getAllPost_GetAllPost_posts | null>  = data?.GetAllPost.posts || [];
-    
     const [ postMutation ] = useMutation<createPost, createPostVariables>(CREATE_POST, {
         refetchQueries: [
             { query: GET_POSTS }
@@ -51,7 +51,7 @@ const useFetch = (): { value: IContext } => {
                         handleMessages( {ok, text: error });
                     }
                     handleProgress(false);
-                    onChangeTab(0);
+                    // onChangeTab(0);
                 }, progressTimeOut);
             }
         },

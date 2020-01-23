@@ -14,6 +14,8 @@
 [x] Navbar.
 [x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
 [x] Navbar - Mobile
+[] Post - fileUpload
+
 ## Todo <예정사항>
 [] Post 자세히 보기.
 [] Post 분류별 보기로 나눠놓기.
@@ -39,6 +41,7 @@
 : 다시 react-apollo로 변경하여 사용함.
 6. yarn add apollo 
 7. yarn add apollo-link-http apollo-link apollo-cache-inmemory
+8. yarn add axios
 N. yarn add antd
 
 

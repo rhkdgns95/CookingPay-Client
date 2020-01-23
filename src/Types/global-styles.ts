@@ -38,6 +38,19 @@ export const GlobalStyles = createGlobalStyle`
             outline: 0;
         }
     }
+    .app-modal {
+        z-index: 9;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,.54);
+        
+    }
     @media(max-width: 910px) {
         .row {
             width: 90%;
