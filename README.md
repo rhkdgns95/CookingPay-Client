@@ -14,7 +14,8 @@
 [x] Navbar.
 [x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
 [x] Navbar - Mobile
-[] Post - fileUpload
+[x] Post - fileUpload(Drag - Drop / Click)
+[x] Post - Preview
 
 ## Todo <예정사항>
 [] Post 자세히 보기.

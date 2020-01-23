@@ -15,8 +15,6 @@ const Post = () => (
     </PostProvider>
 );
 
-const ImgPathEmpty: string = "https://cdn4.buysellads.net/uu/1/57095/1576856619-ad3.png";
-
 const PostPresenter = () => {
     const { user } = useUserContext();
     const { posts, tab, onChangeTab } = usePostContext();
@@ -31,14 +29,25 @@ const PostPresenter = () => {
             }/>
             <Wrapper className={"row"}>
             {
-                posts && posts.length > 0 && tab == 0 && (
+                tab == 0 &&
+                posts && 
+                posts.length > 0 ? (
                     <PostGroup>
                         {
                             posts.map((item, key) => 
-                                <PostCard key={key} name={item?.writer.name || ""} title={item?.title  || ""} description={item?.description || ""} imgSrc={item?.photoUrls![0]?.url || ImgPathEmpty} createdAt={getTime(item?.createdAt || "")}/>
+                                <PostCard key={key} name={item?.writer.name || ""} title={item?.title  || ""} description={item?.description || ""} imgSrc={item!.photoUrls!} createdAt={getTime(item?.createdAt || "")}/>
                             )
                         }
                     </PostGroup>
+                ) : (
+                    tab == 0 &&
+                    posts && 
+                    posts.length === 0 && (
+                        <EmptyPost>
+                            작성된 게시글이 없습니다.
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M4 22v-20h16v11.543c0 4.107-6 2.457-6 2.457s1.518 6-2.638 6h-7.362zm18-7.614v-14.386h-20v24h10.189c3.163 0 9.811-7.223 9.811-9.614zm-5-1.386h-10v-1h10v1zm0-4h-10v1h10v-1zm0-3h-10v1h10v-1z"/></svg>
+                        </EmptyPost>
+                    )
                 )
             }
             {
@@ -64,25 +73,34 @@ const PostGroup = styled.div`
     justify-content: center;
     width: 100%;
     margin: 15px 0;
-    & > div {
-        width: 30%;
-        margin: 10px 10px;
-    }
-    @media(max-width: 910px) {
-        & > div {
-            width: 45%;
-        }
-    }
     @media(max-width: 510px) {
         justify-content: space-between;
-        & > div {
-            width: 49%;
-            margin: 0;
-            margin-bottom: 7.5px;
-            align-items: center;
-        }
     }
 `;
 
+const EmptyPost = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+    margin: 10px 0;
+    font-size: 14px;
+    height: 500px;
+    color: #9c9c9c;
+    border: 1px solid #dfdfdf;
+    & svg {
+        position: absolute;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: .1;
+        width: 100px;
+        height: 100px;
+    }
+`;
 
 export default Post;

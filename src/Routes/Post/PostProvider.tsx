@@ -23,7 +23,7 @@ const usePostContext = () => useContext(PostContext);
 
 const useFetch = (): { value: IContext } => {
     const { progress, handleProgress, handleMessages, progressTimeOut } = useAppContext();
-    const [tab, setStep] = useState<number>(1);
+    const [tab, setStep] = useState<number>(0);
 
     const { data, loading } = useQuery<getAllPost, void>(GET_POSTS, {
         fetchPolicy: "cache-and-network",
