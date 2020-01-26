@@ -18,6 +18,8 @@ const PostCard: React.FC<IProps> = ({
     createdAt,
     profile
 }) => {
+    const isMultiPhotos: boolean = imgSrc.length > 1;
+
     const cursorSpeend: number = 500;
     const [cursor, setCursor] = useState<number>(0);
     const [cursorLoading, setCursorLoading] = useState<boolean>(false);
@@ -49,9 +51,12 @@ const PostCard: React.FC<IProps> = ({
                     </PhotoProfile>
                     <PhotoTitle>
                         { title }
-                        <CursorNumber>
-                            { cursor + 1 } / { imgSrc.length }
-                        </CursorNumber>
+                        {
+                            isMultiPhotos && 
+                            <CursorNumber>
+                                { cursor + 1 } / { imgSrc.length }
+                            </CursorNumber>
+                        }
                     </PhotoTitle>
                     <PhotoBox>
                         <PhotoScreen cursor={cursor} length={imgSrc.length}>
@@ -65,7 +70,7 @@ const PostCard: React.FC<IProps> = ({
                         </PhotoScreen>
                         <>
                             {
-                                imgSrc.length > 1 &&
+                                isMultiPhotos &&
                                 cursor > 0 && (
                                     <LeftSide className={"side"} onClick={e => {
                                         if(cursor > 0) { handleCursor(cursor - 1) }
@@ -75,7 +80,7 @@ const PostCard: React.FC<IProps> = ({
                                 )
                             }
                             {
-                                imgSrc.length > 1 &&
+                                isMultiPhotos &&
                                 cursor < imgSrc.length - 1 && (
                                     <RightSide className={"side"} onClick={e => {
                                         if(cursor < imgSrc.length - 1) { handleCursor(cursor + 1) }
@@ -88,13 +93,18 @@ const PostCard: React.FC<IProps> = ({
                         </>
                     </PhotoBox>
                     <PhotoDate>
-                        <PhotoPagination>
-                            {
-                                imgSrc.map((_, key) => 
-                                    <PhotoPaginationItem className={key === cursor ? "active" : ""} key={key} onClick={e => handleCursor(key)}/>
-                                )
-                            }
-                        </PhotoPagination>
+                        {
+                            isMultiPhotos &&(
+                                <PhotoPagination>
+                                    {
+                                        imgSrc.map((_, key) => 
+                                            <PhotoPaginationItem className={key === cursor ? "active" : ""} key={key} onClick={e => handleCursor(key)}/>
+                                        )
+                                    }
+                                </PhotoPagination>
+                            )
+                        }
+                        
                         { createdAt }
                     </PhotoDate>
                     <Description>{ description }</Description>
@@ -199,7 +209,7 @@ const Photo = styled.div`
 `;
 const PhotoImg = styled.img`
     max-width: 100%;
-    min-width: 50%;
+    // min-width: 50%;
     margin: 0 auto;
 `;
 const PhotoDate = styled.p`

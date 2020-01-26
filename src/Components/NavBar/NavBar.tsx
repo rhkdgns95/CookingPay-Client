@@ -81,19 +81,24 @@ const Wrapper = styled.div`
 `;
 
 const Bg = styled.div`
-    z-index: 1;
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 0;
-    opacity: 0;
-    height: 100%;
-    transition: .3s;
-    background-color: rgba(0,0,0,.5);
-    &.active {
-        width: 70%;
-        opacity: 1;
+    display: none;
+    @media(max-width: 911px) {
+        display: block;
+        z-index: 1;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 0;
+        opacity: 0;
+        height: 100%;
+        transition: .3s;
+        background-color: rgba(0,0,0,.5);
+        &.active {
+            width: 70%;
+            opacity: 1;
+        }
     }
+    
 `;
 const ToggleBgBtn = styled.div`
     position: absolute;

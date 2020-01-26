@@ -3,6 +3,24 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL subscription operation: subscriptionPublicMessage
+// ====================================================
+
+export interface subscriptionPublicMessage_SubscriptionPublicMessage {
+  __typename: "PublicMessage";
+  id: number;
+  text: string;
+}
+
+export interface subscriptionPublicMessage {
+  SubscriptionPublicMessage: subscriptionPublicMessage_SubscriptionPublicMessage | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getMyProfile
 // ====================================================
 

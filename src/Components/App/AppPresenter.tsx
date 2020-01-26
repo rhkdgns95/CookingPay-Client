@@ -6,11 +6,10 @@ import AppProvider from "./AppProvider";
 import AppMessage from "../AppMessage";
 import AppProgress from "../AppProgress";
 import { graphql } from "react-apollo";
-import { IS_LOGGED_IN, LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
+import { IS_LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
 import Post from "../../Routes/Post";
 import SignUp from "../../Routes/SignUp";
-
 
 const App = ({
   data: {auth: { isLoggedIn }}

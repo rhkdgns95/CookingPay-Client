@@ -8,6 +8,7 @@ import { useAppContext } from "../../Components/App/AppProvider";
 import { LOGGED_IN } from "./LoginQueries.local";
 import { emailSignInVariables, emailSignIn } from "../../Types/api";
 import NavBar from "../../Components/NavBar";
+import PublicChatRoom from "../../Components/PublicChatRoom";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
@@ -111,6 +112,9 @@ const Login = () => {
         <Container>
             <NavBar toggleLogin={toggleForm}/>
             <Wrapper>
+                <Row className={"row"}>
+                    <PublicChatRoom user={null}/>
+                </Row>
                 <LoginForm 
                     className={isForm ? "active" : ""}
                     onSubmit={ e => {
@@ -139,28 +143,34 @@ const Container = styled.div`
 const Wrapper = styled.div`
     height: 100%;
     width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
 `;
-
+const Row = styled.div`
+`;
 const LoginForm = styled.form`
-    position: relative;
+    position: fixed;
+    left: 50%;
     background-color: white;
     width: 90%;
     max-width: 500px;
     padding: 30px 10px;
     border-radius: 6px;
     box-shadow: 1px 2px 4px rgba(0,0,0,.24), -1px -2px 4px rgba(0,0,0,.14);
-    transform: scale(0);
     
     opacity: .5;
     transition-timing-function: ease-in-out;
     z-index: -1;
+    top: 10%;
+    transform: scale(0) translateY(0);
+    @media(max-width: 910px) {
+        top: 50%;
+    }
     &.active {
-        transform: scale(1);
+        top: 50%;
+        transform: scale(1) translate(-50%, -50%);
         opacity: 1;
-        z-index: 1;
+        z-index: 3;
         transition: .3s;
     }
 `;
