@@ -24,3 +24,11 @@ export const FRAGMENT_POSTIMAGE = gql`
         postId
     }
 `;
+
+export const FRAGMENT_PUBLIC_MESSAGE = gql`
+    fragment ItemPublicMessage on PublicMessage {
+        id
+        text
+        createdAt
+    }
+`;

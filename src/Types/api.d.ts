@@ -6,14 +6,78 @@
 // GraphQL subscription operation: subscriptionPublicMessage
 // ====================================================
 
+export interface subscriptionPublicMessage_SubscriptionPublicMessage_writer {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
 export interface subscriptionPublicMessage_SubscriptionPublicMessage {
   __typename: "PublicMessage";
   id: number;
   text: string;
+  createdAt: string;
+  writer: subscriptionPublicMessage_SubscriptionPublicMessage_writer;
 }
 
 export interface subscriptionPublicMessage {
   SubscriptionPublicMessage: subscriptionPublicMessage_SubscriptionPublicMessage | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getPublicMessage
+// ====================================================
+
+export interface getPublicMessage_GetPublicMessage_publicMessages_writer {
+  __typename: "User";
+  id: number;
+  name: string;
+}
+
+export interface getPublicMessage_GetPublicMessage_publicMessages {
+  __typename: "PublicMessage";
+  id: number;
+  text: string;
+  createdAt: string;
+  writer: getPublicMessage_GetPublicMessage_publicMessages_writer;
+}
+
+export interface getPublicMessage_GetPublicMessage {
+  __typename: "GetPublicMessageResponse";
+  ok: boolean;
+  error: string | null;
+  publicMessages: (getPublicMessage_GetPublicMessage_publicMessages | null)[] | null;
+}
+
+export interface getPublicMessage {
+  GetPublicMessage: getPublicMessage_GetPublicMessage;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: sendPublicMessage
+// ====================================================
+
+export interface sendPublicMessage_SendPublicMessage {
+  __typename: "SendPublicMessageResponse";
+  ok: boolean;
+  error: string | null;
+  messageId: number | null;
+}
+
+export interface sendPublicMessage {
+  SendPublicMessage: sendPublicMessage_SendPublicMessage;
+}
+
+export interface sendPublicMessageVariables {
+  text: string;
 }
 
 /* tslint:disable */
@@ -201,6 +265,21 @@ export interface ItemPostImage {
   id: number;
   url: string;
   postId: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: ItemPublicMessage
+// ====================================================
+
+export interface ItemPublicMessage {
+  __typename: "PublicMessage";
+  id: number;
+  text: string;
+  createdAt: string;
 }
 
 /* tslint:disable */

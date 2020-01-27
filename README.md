@@ -19,6 +19,7 @@
 [x] Post - Preview Pagination
 [x] SignUp, apollo.ts - production/deploy
 [x] PublicChatRoom / SubscriptionPublicMessage / apllo.ts(webSocket Link)
+[x] PublicChatRoom - GetPublicMessage / SubscribeToMoreOptions / apollo.ts(websocket auth(connectionParams))
 
 ## Todo <예정사항>
 [] Post 자세히 보기.

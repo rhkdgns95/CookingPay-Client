@@ -23,11 +23,14 @@ const App = ({
   );
 }
 
-const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => (
-  <BrowserRouter>
-      { isLoggedIn ? <User><LoggedIn/></User>: <LoggedOut/> }
-  </BrowserRouter>
-);
+const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => {
+  console.log("isLogged in ?  : ", isLoggedIn)
+  return (
+    <BrowserRouter>
+        { isLoggedIn ? <User><LoggedIn/></User>: <LoggedOut/> }
+    </BrowserRouter>
+  );
+};
 
 const LoggedIn = () => (
     <Switch>

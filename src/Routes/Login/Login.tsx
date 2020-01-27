@@ -9,6 +9,7 @@ import { LOGGED_IN } from "./LoginQueries.local";
 import { emailSignInVariables, emailSignIn } from "../../Types/api";
 import NavBar from "../../Components/NavBar";
 import PublicChatRoom from "../../Components/PublicChatRoom";
+import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../../Components/PublicChatRoom/PublicChatRoomQueries";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');

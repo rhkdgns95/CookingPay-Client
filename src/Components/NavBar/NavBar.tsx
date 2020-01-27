@@ -3,6 +3,7 @@ import styled from "../../Styles/typed-components";
 import { useMutation } from "react-apollo";
 import { LOGGED_OUT } from "../../Routes/Login/LoginQueries.local";
 import { Link } from "react-router-dom";
+import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../PublicChatRoom/PublicChatRoomQueries";
 
 interface IProps {
     name?: string;

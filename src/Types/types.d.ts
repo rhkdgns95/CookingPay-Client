@@ -15,3 +15,7 @@ interface IUseInputText {
     value: string;
     onChange: React.ChangeEventHandler<HTMLInputElement> = () => any;
 }
+interface IUseTextArea {
+    value: string;
+    onChange: React.ChangeEventHandler<HTMLTextAreaElement> = () => any;
+}

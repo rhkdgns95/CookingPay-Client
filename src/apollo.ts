@@ -1,7 +1,7 @@
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { ApolloLink, split } from "apollo-link"; 
+import { ApolloLink, split, Operation } from "apollo-link"; 
 import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 import { OperationDefinitionNode, FragmentDefinitionNode } from "graphql";
@@ -35,15 +35,20 @@ const httpLink = createHttpLink({
 });
 
 // Create a WebSocket link:
+// - reconnect: 서버 연결이 끊어져도 계속해서 connect요청을 보낸다.
+// - connectionParams: 로그인 유저인지 파악할 수 있도록 한다. 
+// ( token전송하여, 서버측의 onConnect에서 connectionParams["X-JWT"]를 확인하면된다. )
 const wsLink = new WebSocketLink({
     uri: wsUri,
     options: {
-        reconnect: true
+        reconnect: true,
+        connectionParams: {
+            "X-JWT": getToken()
+        }
     }
 });
 
-const authMiddleware = new ApolloLink((operation, forward: any) => {
-    
+const authMiddleware: ApolloLink = new ApolloLink((operation: Operation, forward: any) => {
     operation.setContext({
         headers: {
             "X-JWT": getToken()
@@ -51,19 +56,34 @@ const authMiddleware = new ApolloLink((operation, forward: any) => {
     });
     return forward(operation);
 });
+
+// Network Fetch: 
+// 클라이언트에서 서버에 요청하는 쿼리문을 split확인.
+// true면 첫번째 인지 - wsLink / false면 두번째 인자 - authMiddleware.concat(http);
+//
+// 아래 Fetch 특성을 나열
+// 
+// Query면, definition.operation = query.
+// Mutation이면, definition.operation = mutation.
+// Subscription이면, definition.operation = subscription.
 const link = split(
     ({ query }) => {
         const definition: OperationDefinitionNode | FragmentDefinitionNode = getMainDefinition(query);
-        console.log("definition: ", definition);
+        // console.log("definition: ", definition);
         return (
             definition.kind === 'OperationDefinition' &&
             definition.operation === 'subscription'
         );
     },
-    wsLink,
+    // wsLink,
+    // httpLink
+    authMiddleware.concat(wsLink),
     authMiddleware.concat(httpLink)
-)
+);
 // const link = authMiddleware.concat(httpLink);
+
+
+// localStateLink
 
 const client = new ApolloClient({
     cache,

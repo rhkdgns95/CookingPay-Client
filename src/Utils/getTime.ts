@@ -41,8 +41,10 @@ export const getTime = (date: string): string => {
         result = `${minute} minutes ago`;
     } else if(second > 0) {
         result = `${second} seconds ago`;
+    } else if(second === 0) {
+        result = "방금전" // 실행한 날짜입력되도록 하기.
     } else {
-        result = "" // 실행한 날짜입력되도록 하기.
+        result = "..."
     }
     return result;
 }
