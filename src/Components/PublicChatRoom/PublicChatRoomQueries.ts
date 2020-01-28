@@ -1,18 +1,18 @@
 import { gql } from "apollo-boost";
-import { FRAGMENT_PUBLIC_MESSAGE } from "../../fragment";
+import { FRAGMENT_PUBLIC_MESSAGE, FRAGMENT_USER } from "../../fragment";
 
 export const SUBSCRIPTION_PUBLIC_MESSAGE = gql`
     subscription subscriptionPublicMessage {
         SubscriptionPublicMessage {
             ...ItemPublicMessage
             writer {
-                id
-                name
+                ...ItemUser
             }
 
         }
     }
     ${FRAGMENT_PUBLIC_MESSAGE}
+    ${FRAGMENT_USER}
 `;
 
 export const GET_PUBLIC_MESSAGE = gql`
@@ -23,13 +23,13 @@ export const GET_PUBLIC_MESSAGE = gql`
             publicMessages {
                 ...ItemPublicMessage
                 writer {
-                    id
-                    name
+                    ...ItemUser
                 }
             }
         }
     }
     ${FRAGMENT_PUBLIC_MESSAGE}
+    ${FRAGMENT_USER}
 `;
 
 export const SEND_PUBLIC_MESSAGE = gql`
@@ -40,4 +40,17 @@ export const SEND_PUBLIC_MESSAGE = gql`
             messageId
         }
     }
+`;
+
+export const GET_USER_LIST = gql`
+    query getUserList {
+        GetUserList {
+            ok
+            error
+            users {
+                ...ItemUser
+            }            
+        }
+    }
+    ${FRAGMENT_USER}
 `;

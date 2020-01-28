@@ -20,10 +20,15 @@
 [x] SignUp, apollo.ts - production/deploy
 [x] PublicChatRoom / SubscriptionPublicMessage / apllo.ts(webSocket Link)
 [x] PublicChatRoom - GetPublicMessage / SubscribeToMoreOptions / apollo.ts(websocket auth(connectionParams))
+[x] PublicChatRoom - GetUserList(show users profile)
+[] EmailSignUp - Photo Add.
+[] UpdateMyProfile
+
 
 ## Todo <예정사항>
 [] Post 자세히 보기.
-[] Post 분류별 보기로 나눠놓기.
+[] Post 분류(최신/기부금액)
+[] PublicChatRoom 구독하는 유저목록 나열(로그인 -> 연결성공, 로그아웃 -> 연결 해제)
 [] 파일 업로드.
 [] 기부하기.
 [] Post.

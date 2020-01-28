@@ -44,8 +44,8 @@ const wsLink = new WebSocketLink({
         reconnect: true,
         connectionParams: {
             "X-JWT": getToken()
-        }
-    }
+        },
+    },
 });
 
 const authMiddleware: ApolloLink = new ApolloLink((operation: Operation, forward: any) => {
@@ -56,6 +56,7 @@ const authMiddleware: ApolloLink = new ApolloLink((operation: Operation, forward
     });
     return forward(operation);
 });
+
 
 // Network Fetch: 
 // 클라이언트에서 서버에 요청하는 쿼리문을 split확인.
@@ -87,7 +88,7 @@ const link = split(
 
 const client = new ApolloClient({
     cache,
-    link,
+    link,    
     resolvers: {
         Mutation: {
             UserLoggedIn: (_, { token }, { cache: currentCache }) => {

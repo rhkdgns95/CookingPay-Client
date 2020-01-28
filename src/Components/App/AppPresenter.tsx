@@ -10,6 +10,7 @@ import { IS_LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
 import Post from "../../Routes/Post";
 import SignUp from "../../Routes/SignUp";
+import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../PublicChatRoom/PublicChatRoomQueries";
 
 const App = ({
   data: {auth: { isLoggedIn }}

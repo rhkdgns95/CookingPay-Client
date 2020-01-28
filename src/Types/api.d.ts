@@ -10,6 +10,8 @@ export interface subscriptionPublicMessage_SubscriptionPublicMessage_writer {
   __typename: "User";
   id: number;
   name: string;
+  email: string;
+  photo: string | null;
 }
 
 export interface subscriptionPublicMessage_SubscriptionPublicMessage {
@@ -36,6 +38,8 @@ export interface getPublicMessage_GetPublicMessage_publicMessages_writer {
   __typename: "User";
   id: number;
   name: string;
+  email: string;
+  photo: string | null;
 }
 
 export interface getPublicMessage_GetPublicMessage_publicMessages {
@@ -85,6 +89,33 @@ export interface sendPublicMessageVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getUserList
+// ====================================================
+
+export interface getUserList_GetUserList_users {
+  __typename: "User";
+  id: number;
+  name: string;
+  email: string;
+  photo: string | null;
+}
+
+export interface getUserList_GetUserList {
+  __typename: "GetUserListResponse";
+  ok: boolean;
+  error: string | null;
+  users: (getUserList_GetUserList_users | null)[] | null;
+}
+
+export interface getUserList {
+  GetUserList: getUserList_GetUserList;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getMyProfile
 // ====================================================
 
@@ -93,6 +124,7 @@ export interface getMyProfile_GetMyProfile_user {
   id: number;
   name: string;
   email: string;
+  photo: string | null;
 }
 
 export interface getMyProfile_GetMyProfile {
@@ -234,6 +266,7 @@ export interface ItemUser {
   id: number;
   name: string;
   email: string;
+  photo: string | null;
 }
 
 /* tslint:disable */

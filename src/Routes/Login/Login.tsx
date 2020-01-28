@@ -10,6 +10,7 @@ import { emailSignInVariables, emailSignIn } from "../../Types/api";
 import NavBar from "../../Components/NavBar";
 import PublicChatRoom from "../../Components/PublicChatRoom";
 import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../../Components/PublicChatRoom/PublicChatRoomQueries";
+import { GET_MY_PROFILE } from "../../Components/User/UserQueries";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
@@ -34,10 +35,10 @@ const useFetch = () => {
     const inputPassword = useInput(progress);
     const [isForm, setIsForm] = useState<boolean>(false);
 
-    const [ loginMutation ] = useMutation(LOGGED_IN);
+    const [ loginMutation ] = useMutation(LOGGED_IN, {
+    });
 
-    const [ loginQuery ] = useLazyQuery<emailSignIn, emailSignInVariables>(EMAIL_SIGN_IN, {
-        fetchPolicy: "cache-and-network",
+    const [ loginQuery, { loading: loadingLogin }] = useLazyQuery<emailSignIn, emailSignInVariables>(EMAIL_SIGN_IN, {
         onCompleted: data => {
             const { EmailSignIn: { ok, error, token }} = data;
             if(progress) {
@@ -50,7 +51,7 @@ const useFetch = () => {
                         loginMutation({
                             variables: {
                                 token
-                            }
+                            },
                         });
 
                     } else {
@@ -97,6 +98,7 @@ const useFetch = () => {
         setIsForm(!isForm);
     }
     return {
+        loadingLogin,
         inputEmail,
         inputPassword,
         handleLogin,
@@ -107,14 +109,14 @@ const useFetch = () => {
 };
 
 const Login = () => {
-    const { inputEmail, inputPassword, handleLogin, isForm, toggleForm } = useFetch();
+    const { loadingLogin, inputEmail, inputPassword, handleLogin, isForm, toggleForm } = useFetch();
     
     return (
         <Container>
             <NavBar toggleLogin={toggleForm}/>
             <Wrapper>
                 <Row className={"row"}>
-                    <PublicChatRoom user={null}/>
+                    { !loadingLogin && <PublicChatRoom user={null}/> }
                 </Row>
                 <LoginForm 
                     className={isForm ? "active" : ""}

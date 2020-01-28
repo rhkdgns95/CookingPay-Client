@@ -3,6 +3,31 @@ import { createGlobalStyle } from "../Styles/typed-components";
 export const GlobalStyles = createGlobalStyle`
     * {
         box-sizing: border-box;
+        ::-webkit-scrollbar {
+            width: 5px;
+          }
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 20px;
+        }   
+        
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #7c9ac5;
+            border-radius: 20px;
+            transition: .3s;
+            cursor: pointer;
+            &:hover {
+                background: #57b2e8;
+            }
+        }
+        
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:active {
+            background: ${props => props.theme.blueColor};
+            cursor: pointer;
+        }
     }
     html, body {
         margin: 0;
@@ -14,7 +39,7 @@ export const GlobalStyles = createGlobalStyle`
         overflow-y: scroll;
     }
     body {
-        
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     }
     #root {
         height: 100%;
