@@ -10,7 +10,12 @@ import { IS_LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
 import Post from "../../Routes/Post";
 import SignUp from "../../Routes/SignUp";
-import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../PublicChatRoom/PublicChatRoomQueries";
+
+export const CloudinaryName: string = "dljwleqvc";
+export const CloudinaryType: string = "image";
+export const CloudinaryApiKey: string = "347663746347357";
+export const CloudinaryPreset: string = "hreon3pm";
+export const CloudinaryURL: string = `https://api.cloudinary.com/v1_1/${CloudinaryName}/${CloudinaryType}/upload`;
 
 const App = ({
   data: {auth: { isLoggedIn }}

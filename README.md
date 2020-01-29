@@ -21,7 +21,7 @@
 [x] PublicChatRoom / SubscriptionPublicMessage / apllo.ts(webSocket Link)
 [x] PublicChatRoom - GetPublicMessage / SubscribeToMoreOptions / apollo.ts(websocket auth(connectionParams))
 [x] PublicChatRoom - GetUserList(show users profile)
-[] EmailSignUp - Photo Add.
+[x] EmailSignUp - Photo Add
 [] UpdateMyProfile
 
 
@@ -65,6 +65,10 @@
 : 하나의 테이블의 종류를 분리사용하는것 가능함.
 : 두개의 테이블의 Fragment를 구성하면 실행 안됨.
 
+
+### N. Tip
+1. [Ctrl + Shift + `]
+: 아래의 터미널 창 자동추가
 
 <!-- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

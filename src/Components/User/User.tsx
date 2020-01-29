@@ -17,7 +17,7 @@ const useFetch = (): { value: IContext } => {
     const { data, loading } = useQuery<getMyProfile, void>(GET_MY_PROFILE, {
         fetchPolicy: "network-only",
         onCompleted: data => {
-            console.log("GetMyProfile onCompleted: ", data);
+            // console.log("GetMyProfile onCompleted: ", data);
         },
         onError: data => {
             console.log("GetMyProfile onError: ", data);

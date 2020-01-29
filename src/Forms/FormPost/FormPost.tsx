@@ -6,13 +6,7 @@ import { usePostContext } from "../../Routes/Post/PostProvider";
 import InputFile from "../../Components/InputFile";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
-
-const CloudinaryName: string = "dljwleqvc";
-const CloudinaryType: string = "image";
-const CloudinaryApiKey: string = "347663746347357";
-const CloudinaryPreset: string = "hreon3pm";
-const CloudinaryURL: string = `https://api.cloudinary.com/v1_1/${CloudinaryName}/${CloudinaryType}/upload`;
+import { CloudinaryApiKey, CloudinaryPreset, CloudinaryURL } from "../../Components/App/AppPresenter";
 
 const useInput = (progress: boolean): IUseInputText => {
     const [value, setValue] = useState<string>("");

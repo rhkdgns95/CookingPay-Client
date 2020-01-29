@@ -251,6 +251,7 @@ export interface emailSignUpVariables {
   name: string;
   password: string;
   email: string;
+  photo?: string | null;
 }
 
 /* tslint:disable */

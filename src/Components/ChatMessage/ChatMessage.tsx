@@ -59,7 +59,9 @@ const Photo = styled.div<IPhoto>`
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     & svg {
+        display: block;
         width: 100%;
         height: 100%;
         border-radius: 50%;
@@ -70,9 +72,10 @@ const Photo = styled.div<IPhoto>`
     ${props => props.url ? `background-image: url("${props.url}");` : ``}
 `;
 const UserName = styled.span`
-    margin-top: 20px;
+    position: absolute;
+    margin-top: 12px;
     font-size: 10px;
-    max-width: 126px;
+    max-width: 50px;
     width: 100%;
     white-space: nowrap;
     overflow: hidden;
