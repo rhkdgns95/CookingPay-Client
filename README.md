@@ -23,7 +23,7 @@
 - [x] PublicChatRoom - GetUserList(show users profile)
 - [x] EmailSignUp - Photo Add
 - [x] PublicChatRoom - Mobile UI
-- [] UpdateMyProfile
+- [] My Page - UpdateMyProfile
 
 
 ## Todo <예정사항>
