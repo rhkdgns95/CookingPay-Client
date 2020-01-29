@@ -20,3 +20,11 @@ interface IUseTextArea {
     onChange: React.ChangeEventHandler<HTMLTextAreaElement> = () => any;
     onInit: () => void;
 }
+
+/**
+ *  IChatMenu: Mobile환경에서의 Public CHat의 메뉴들
+ *  - PROFILE: 나의 프로필
+ *  - USERS: 유저들 리스트
+ *  - CHAT: PUBLIC 채팅방
+ */
+type IChatMenu = "PROFILE"| "USERS" | "CHAT";

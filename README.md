@@ -1,40 +1,41 @@
 # Cooking Pay
 
 ## Todo
-[x] React App Init.
-[x] Styles - styled-components.
-[x] Router Component.
-[x] Login Form.
-[x] ApolloProvider, AppProvider - AppMessage, AppProgress.
-[x] Bug Fixed.
-[x] Progress - form disabled onChange.
-[x] HOC - Apollo Local Resolvers - LoggedIn,LoggedOut.
-[x] Codegen.
-[x] UserProvider - Logout, GetMyProfile, NavBar
-[x] Navbar.
-[x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
-[x] Navbar - Mobile
-[x] Post - fileUpload(Drag - Drop / Click)
-[x] Post - Preview
-[x] Post - Preview Pagination
-[x] SignUp, apollo.ts - production/deploy
-[x] PublicChatRoom / SubscriptionPublicMessage / apllo.ts(webSocket Link)
-[x] PublicChatRoom - GetPublicMessage / SubscribeToMoreOptions / apollo.ts(websocket auth(connectionParams))
-[x] PublicChatRoom - GetUserList(show users profile)
-[x] EmailSignUp - Photo Add
-[] UpdateMyProfile
+- [x] React App Init.
+- [x] Styles - styled-components.
+- [x] Router Component.
+- [x] Login Form.
+- [x] ApolloProvider, AppProvider - AppMessage, AppProgress.
+- [x] Bug Fixed.
+- [x] Progress - form disabled onChange.
+- [x] HOC - Apollo Local Resolvers - LoggedIn,LoggedOut.
+- [x] Codegen.
+- [x] UserProvider - Logout, GetMyProfile, NavBar
+- [x] Navbar.
+- [x] Post - Tabs(View,Write), TopTitle, GlobalStyles - row
+- [x] Navbar - Mobile
+- [x] Post - fileUpload(Drag - Drop / Click)
+- [x] Post - Preview
+- [x] Post - Preview Pagination
+- [x] SignUp, apollo.ts - production/deploy
+- [x] PublicChatRoom / SubscriptionPublicMessage / apllo.ts(webSocket Link)
+- [x] PublicChatRoom - GetPublicMessage / SubscribeToMoreOptions / apollo.ts(websocket auth(connectionParams))
+- [x] PublicChatRoom - GetUserList(show users profile)
+- [x] EmailSignUp - Photo Add
+- [x] PublicChatRoom - Mobile UI
+- [] UpdateMyProfile
 
 
 ## Todo <예정사항>
-[] Post 자세히 보기.
-[] Post 분류(최신/기부금액)
-[] PublicChatRoom 구독하는 유저목록 나열(로그인 -> 연결성공, 로그아웃 -> 연결 해제)
-[] 파일 업로드.
-[] 기부하기.
-[] Post.
-[] User Create Post.
-[] User Donate.
-[] Manager Check Others.
+- [] Post 자세히 보기.
+- [] Post 분류(최신/기부금액)
+- [] PublicChatRoom 구독하는 유저목록 나열(로그인 -> 연결성공, 로그아웃 -> 연결 해제)
+- [] 파일 업로드.
+- [] 기부하기.
+- [] Post.
+- [] User Create Post.
+- [] User Donate.
+- [] Manager Check Others.
 
 ## Command
 > now deploy: now -n '프로젝트 명'

@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import styled from "../../Styles/typed-components";
 import InputText from "../../Components/InputText";
 import { Link } from "react-router-dom";
-import { useLazyQuery, useApolloClient, useMutation } from "react-apollo";
+import { useLazyQuery, useMutation } from "react-apollo";
 import { EMAIL_SIGN_IN } from "./LoginQueries";
 import { useAppContext } from "../../Components/App/AppProvider";
 import { LOGGED_IN } from "./LoginQueries.local";
 import { emailSignInVariables, emailSignIn } from "../../Types/api";
 import NavBar from "../../Components/NavBar";
 import PublicChatRoom from "../../Components/PublicChatRoom";
-import { SUBSCRIPTION_PUBLIC_MESSAGE } from "../../Components/PublicChatRoom/PublicChatRoomQueries";
-import { GET_MY_PROFILE } from "../../Components/User/UserQueries";
 
 const useInput = (progress: boolean) => {
     const [value, setValue] = useState<string>('');
@@ -118,6 +116,9 @@ const Login = () => {
                 <Row className={"row"}>
                     { !loadingLogin && <PublicChatRoom user={null}/> }
                 </Row>
+                {
+                    isForm && <LoginFormBg onClick={toggleForm} />
+                }
                 <LoginForm 
                     className={isForm ? "active" : ""}
                     onSubmit={ e => {
@@ -160,12 +161,12 @@ const LoginForm = styled.form`
     padding: 30px 10px;
     border-radius: 6px;
     box-shadow: 1px 2px 4px rgba(0,0,0,.24), -1px -2px 4px rgba(0,0,0,.14);
-    
     opacity: .5;
     transition-timing-function: ease-in-out;
     z-index: -1;
     top: 10%;
     transform: scale(0) translateY(0);
+
     @media(max-width: 910px) {
         top: 50%;
     }
@@ -177,7 +178,19 @@ const LoginForm = styled.form`
         transition: .3s;
     }
 `;
-
+const LoginFormBg = styled.div`
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0,.42);
+    @media(max-width: 910px) {
+        background-color: rgba(250,250,250,.42);
+    }
+`;
 const Linkbar = styled.div`
     display: flex;
     justify-content: space-between;

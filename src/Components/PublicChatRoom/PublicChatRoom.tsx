@@ -37,6 +37,7 @@ const useFetch = (user: ItemUser | null) => {
     const chatScreenRef = useRef<any>({}); // 채팅 스크린의 높이 파악
     const chatScrollRef = useRef<any>({}); // 채팅 스크린의 스크롤 이동여부 파악 (timeout에 적용하기)
     const [chatScrolled, setChatScrolled] = useState<boolean>(false); // 스타일 적용할 스크롤 이벤트 
+    const [chatMenu, setChatMenu] = useState<IChatMenu>("USERS");
 
     const { data: dataUserList } = useQuery<getUserList, any>(GET_USER_LIST, {
         onCompleted: data => {
@@ -224,8 +225,14 @@ const useFetch = (user: ItemUser | null) => {
             }
         }   
     }
-        
-        
+
+    /**
+     *  handleChatMenu: 
+     *   - 채팅 메뉴 아이템(모바일에서 이용.)
+     */
+    const handleChatMenu = (newChatMenu: IChatMenu) => {
+        setChatMenu(newChatMenu);
+    }
 
     const userList: Array<getUserList_GetUserList_users | null> | null = dataUserList?.GetUserList.users || null;
     const publicMessages: Array<getPublicMessage_GetPublicMessage_publicMessages | null> | null = dataPublicMessage?.GetPublicMessage.publicMessages || null;
@@ -238,29 +245,46 @@ const useFetch = (user: ItemUser | null) => {
         userList,
         handleChatScroll,
         chatScrolled,
+        chatMenu,
+        handleChatMenu,
     };
 };
 
 interface IProps {
     user: ItemUser | null;
 };
+const TmpPhoto = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z"/></svg>;
 
 // const PHOTO = "https://taegon.kim/wp-content/uploads/2018/05/image-5.png";
 const PublicChatRoom: React.FC<IProps> = ({
     user
 }) => {
     const { progress } = useAppContext();
-    const { userList, chatScreenRef, publicMessages, handleSendPublicMessage, formText, handleChatScroll, chatScrolled } = useFetch(user);
+    const { userList, chatMenu, handleChatMenu, chatScreenRef, publicMessages, handleSendPublicMessage, formText, handleChatScroll, chatScrolled } = useFetch(user);
+    const mobileRoomTop: number = chatMenu === "USERS" ? 0 : 50;
+    const mobileRoomHeight: number = 200;
 
     return (
         <Container>
             <Wrapper>
-                <Room>
-                    <RoomHeader>
-                        <Title>Public chat</Title>
+                <Room className={"room"}>
+                    <RoomHeader className={"room-header"}>
+                        <Title className={"room-header-title"}>Public chat</Title>
+                        <MobileMyPhoto url={user?.photo || null}>
+                            { !user?.photo && TmpPhoto() }
+                        </MobileMyPhoto>
+                        {/* <MobileMenuButton className={`${chatMenu === "PROFILE" ? "active" : ""} room-header-button`} onClick={e => handleChatMenu("PROFILE")}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z"/></svg>
+                        </MobileMenuButton> */}
+                        <MobileMenuButton className={`${chatMenu === "USERS" ? "active" : ""} room-header-button`} onClick={e => handleChatMenu("USERS")}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17.997 18h-11.995l-.002-.623c0-1.259.1-1.986 1.588-2.33 1.684-.389 3.344-.736 2.545-2.209-2.366-4.363-.674-6.838 1.866-6.838 2.491 0 4.226 2.383 1.866 6.839-.775 1.464.826 1.812 2.545 2.209 1.49.344 1.589 1.072 1.589 2.333l-.002.619zm4.811-2.214c-1.29-.298-2.49-.559-1.909-1.657 1.769-3.342.469-5.129-1.4-5.129-1.265 0-2.248.817-2.248 2.324 0 3.903 2.268 1.77 2.246 6.676h4.501l.002-.463c0-.946-.074-1.493-1.192-1.751zm-22.806 2.214h4.501c-.021-4.906 2.246-2.772 2.246-6.676 0-1.507-.983-2.324-2.248-2.324-1.869 0-3.169 1.787-1.399 5.129.581 1.099-.619 1.359-1.909 1.657-1.119.258-1.193.805-1.193 1.751l.002.463z"/></svg>
+                        </MobileMenuButton>
+                        <MobileMenuButton className={`${chatMenu === "CHAT" ? "active" : ""} room-header-button`} onClick={e => handleChatMenu("CHAT")}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M2.001 9.352c0 1.873.849 2.943 1.683 3.943.031 1 .085 1.668-.333 3.183 1.748-.558 2.038-.778 3.008-1.374 1 .244 1.474.381 2.611.491-.094.708-.081 1.275.055 2.023-.752-.06-1.528-.178-2.33-.374-1.397.857-4.481 1.725-6.649 2.115.811-1.595 1.708-3.785 1.661-5.312-1.09-1.305-1.705-2.984-1.705-4.695-.001-4.826 4.718-8.352 9.999-8.352 5.237 0 9.977 3.484 9.998 8.318-.644-.175-1.322-.277-2.021-.314-.229-3.34-3.713-6.004-7.977-6.004-4.411 0-8 2.85-8 6.352zm20.883 10.169c-.029 1.001.558 2.435 1.088 3.479-1.419-.258-3.438-.824-4.352-1.385-.772.188-1.514.274-2.213.274-3.865 0-6.498-2.643-6.498-5.442 0-3.174 3.11-5.467 6.546-5.467 3.457 0 6.546 2.309 6.546 5.467 0 1.12-.403 2.221-1.117 3.074zm-7.563-3.021c0-.453-.368-.82-.82-.82s-.82.367-.82.82.368.82.82.82.82-.367.82-.82zm3 0c0-.453-.368-.82-.82-.82s-.82.367-.82.82.368.82.82.82.82-.367.82-.82zm3 0c0-.453-.368-.82-.82-.82s-.82.367-.82.82.368.82.82.82.82-.367.82-.82z"/></svg>
+                        </MobileMenuButton>
                     </RoomHeader>
-                    <RoomContent>
-                        <ContentUsers>
+                    <RoomContent mobileHeight={mobileRoomHeight} mobileTop={mobileRoomTop} className={`room-content`}>
+                        <ContentUsers className={"content-users"}>
                             <UserSearchBar>
                                 <SearchInput type={"text"} placeholder={"Find User.."} />
                                 <SearchButtonIcon>
@@ -279,7 +303,7 @@ const PublicChatRoom: React.FC<IProps> = ({
                             }
                             </UserList>
                         </ContentUsers>
-                        <ContentMessage>
+                        <ContentMessage className={"content-chat"}>
                             <ChatScreen className={chatScrolled ? "active" : ""} ref={chatScreenRef} onScroll={handleChatScroll}>
                                 {
                                     publicMessages?.map((publicMessage, key) => 
@@ -294,6 +318,7 @@ const PublicChatRoom: React.FC<IProps> = ({
                         </ContentMessage>
                         <ContentMyProfile
                             photo={user?.photo || null}
+
                         >
                             <ChatProfile
                                 photo={user?.photo || null}
@@ -302,8 +327,6 @@ const PublicChatRoom: React.FC<IProps> = ({
                         </ContentMyProfile>
                     </RoomContent>
                 </Room>
-                Public Chat Room.
-                {user?.name}
             </Wrapper>
         </Container>
     );
@@ -314,12 +337,40 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-
+    @media(max-width: 910px) {
+        .room {
+            overflow: hidden;
+            display: flex;
+            max-height: 500px;
+            .room-header {
+                display: flex;
+                flex-flow: column;
+                justify-content: flex-start;
+                padding-top: 100px;
+                border-right: 1px solid #dfdfdf;
+                max-width: 70px;
+                border-bottom: 0;
+                .room-header-title {
+                    display: none;
+                }
+            }
+            .room-content {
+                display: block;
+                .content-users {
+                    height: 100%;
+                }
+                .content-chat {
+                    height: 100%;
+                }
+            }
+        }
+    }
 `;
 const Room = styled.div`    
     box-shadow: rgba(0, 50, 100, 0.2) 0px 0.5px 10px, rgba(0, 50, 100, 0.2) 0px -0.5px 10px;
 `;
 const RoomHeader = styled.div`
+    position: relative;
     width: 100%;
     text-align: center;
     display: flex;
@@ -332,15 +383,22 @@ const Title = styled.span`
     text-align: center;
     padding: 10px 0;
 `;
-const RoomContent = styled.div`
+interface IRoomContent {
+    mobileHeight: number;
+    mobileTop: number;
+}
+const RoomContent = styled.div<IRoomContent>`
     width: 100%;
     display: flex;
     min-height: 400px;
     max-height: 401px;
     background-color: white;
     @media(max-width: 910px) {
+        height: ${props => props.mobileHeight}%;
+        transform: translateY(-${props => props.mobileTop}%);
         flex-flow: column-reverse;
         max-height: none;
+        transition: .1s;
         & > div {
             width: 100%;
         }
@@ -373,6 +431,9 @@ const ContentUsers = styled.div`
 const UserSearchBar = styled.form`
     position: relative;
     height: 10%;
+    @media(max-width: 910px) {
+        height: 40px;
+    }
 `;
 const SearchInput = styled.input`   
     height: 100%;
@@ -432,6 +493,9 @@ const UserList = styled.div`
         background: ${props => props.theme.blueColor};
         cursor: pointer;
     }
+    @media(max-width: 910px) {
+        height: 460px;
+    }
 `;
 
 const ContentMessage = styled.div`
@@ -440,13 +504,12 @@ const ContentMessage = styled.div`
     background-color: white;
     border-left: 1px solid #dadada;
     border-right: 1px solid #dadada;
-    
-    
-    
     @media(max-width: 910px) {
         border: 0;
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        border-top: 0;
+        border-bottom: 0;
+        // border-top: 1px solid black;
+        // border-bottom: 1px solid black;
 
     }
 `;
@@ -478,11 +541,15 @@ const ContentMyProfile = styled.div<IContentMyProfile>`
         background: linear-gradient(150deg, rgba(86,79,195,1) 0%, rgba(104,94,255,1) 100%);
     }
     @media(max-width: 910px) {
-        padding: 30px;
+        // padding: 30px;
     }
 `;
 const ChatScreen = styled.div`
     position: relative;
+    height: 87%;
+    overflow-y: auto;
+    padding: 0 10px;
+    
     &::before {
         content: "";
         display: block;
@@ -508,9 +575,7 @@ const ChatScreen = styled.div`
             top: 100%;
         }    
     }
-    height: 87%;
-    overflow-y: auto;
-    padding: 0 10px;
+    
     ::-webkit-scrollbar {
         width: 5px;
       }
@@ -537,7 +602,7 @@ const ChatScreen = styled.div`
         cursor: pointer;
     }
     @media(max-width: 910px) {
-        max-height: 350px;
+        max-height: 460px;
     }
 `;
 const ChatInputForm = styled.form`
@@ -545,6 +610,11 @@ const ChatInputForm = styled.form`
     width: 100%;
     display: flex;
     border-top: 1px solid #dadada;
+    @media(max-width: 910px) {
+        display: flex;
+        height: 40px;
+        // max-height: 40px;
+    }
 `;
 const InputChat = styled.textarea`
     font-size: 12px;
@@ -588,10 +658,78 @@ const InputChatSubmit = styled.input`
             background-color: #e18f04;
         }
     }
+    @media(max-width: 910px) {
+        height: 100%;
+        margin-right: 0;
+        right: 0;
+        border-radius: 0;
+    }
 `;
 const RoomFooter = styled.div`
     
 `;
 
 
+// 모바일 Start
+interface IMobilePhoto {
+    url: string | null;
+}
+const MobileMyPhoto = styled.div<IMobilePhoto>`
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    border: 1px solid gray;
+    width: 50px;
+    height: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    & svg {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        padding: 1px;
+    }
+    background-size: cover;
+    background-position: center;
+    ${props => props.url ? `background-image: url("${props.url}");` : ``}
+    @media(max-width: 910px) {
+        display: flex;
+    }
+`;
+const MobileMenuButton = styled.div`
+    position: relative;
+    border-radius: 50%;
+    padding: 5px;
+    margin-bottom: 10px;
+    display: none;
+
+    & svg {
+        width: 30px;
+        height: 30px;
+        opacity: .3;
+        transition: .2s;
+    }
+    &:not(.active) {
+        cursor: pointer;
+    }
+    &:hover {
+        & svg {
+            opacity: .6;
+        }
+    }
+    &.active {
+        & svg {
+            opacity: 1;
+        }
+    }
+    @media(max-width: 910px) {
+        display: flex;
+    }
+`;
+
+// 모바일 End
 export default PublicChatRoom;
