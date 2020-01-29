@@ -11,9 +11,12 @@ import { OperationDefinitionNode, FragmentDefinitionNode } from "graphql";
 
 // const PRODUCTION_URL: string = "http://ec2-18-212-24-8.compute-1.amazonaws.com:4000/graphql";
 
-const PRODUCTION_URL: string = "https://cooking-pay.herokuapp.com:4000/graphql";
-const uri: string = process.env.NODE_ENV === "production" ? PRODUCTION_URL : "http://localhost:4000/graphql";
-const wsUri: string = `ws://localhost:4000/subscription`;
+const URL: string = "https://cooking-pay.herokuapp.com:4000";
+const GRAPHQL_ENDPOINT: string = `${URL}/graphql`;
+const PRODUCTION_SUBSCRIPTION: string = `ws://${URL}/subscription`;
+
+const uri: string = process.env.NODE_ENV === "production" ? GRAPHQL_ENDPOINT : "http://localhost:4000/graphql";
+const wsUri: string = process.env.NODE_END === "production" ? PRODUCTION_SUBSCRIPTION : `ws://localhost:4000/subscription`;
 
 const getToken = () => localStorage.getItem("x-jwt") || "";
 
