@@ -73,6 +73,7 @@ const Photo = styled.div<IPhoto>`
 `;
 const UserName = styled.span`
     position: absolute;
+    top: 10px;
     margin-top: 12px;
     font-size: 10px;
     max-width: 50px;

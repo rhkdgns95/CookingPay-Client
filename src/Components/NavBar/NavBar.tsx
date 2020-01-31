@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 interface IProps {
     name?: string;
     toggleLogin?: () => any;
+    menu?: "post" | "notice" | "donate" | "consult";
 }
 const useFetch = () => {
     const [ logoutMutation ] = useMutation(LOGGED_OUT, {
@@ -26,7 +27,8 @@ const ClosePath = () => <svg xmlns="http://www.w3.org/2000/svg" width="15" heigh
 const OpenPath = () => <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>;
 const NavBar: React.FC<IProps> = ({
     name,
-    toggleLogin
+    toggleLogin,
+    menu
 }) => {
     const { logoutMutation } = useFetch();
     const [ isBar, setIsBar ] = useState<boolean>(false);
@@ -40,11 +42,11 @@ const NavBar: React.FC<IProps> = ({
             <Bg className={`${isBar ? "active" : ""}`} onClick={toggleBar}/>
             <Wrapper className={"row"}>
                 <NavGroup>
-                    <MainLink to={"/"}>Home</MainLink>
-                    <NavItem className={'nav-link-item'} to={"/post"}>Post</NavItem>
-                    <NavItem className={'nav-link-item'} to={"/"}>Notice</NavItem>
-                    <NavItem className={'nav-link-item'}to={"/"}>Donate</NavItem>
-                    <NavItem className={'nav-link-item'} to={"/"}>Consult</NavItem>
+                    <MainLink to={"/"}>C∞KING-PAY</MainLink>
+                    <NavItem className={`nav-link-item ${menu === "post" ? "active" : ""}`} to={"/post"}>Post</NavItem>
+                    <NavItem className={`nav-link-item ${menu === "notice" ? "active" : ""}`} to={"/"}>Notice</NavItem>
+                    <NavItem className={`nav-link-item ${menu === "donate" ? "active" : ""}`} to={"/"}>Donate</NavItem>
+                    <NavItem className={`nav-link-item ${menu === "consult" ? "active" : ""}`} to={"/"}>Consult</NavItem>
                 </NavGroup>
                 <ToggleBgBtn className={isBar ? "active" : ""} onClick={toggleBar}>
                     {
@@ -70,12 +72,12 @@ const NavBar: React.FC<IProps> = ({
 
 const Container = styled.div`
     position: relative;
-    background-color: #183e70;
-    color: white;
+    background-color: white;
+    color: #909090;
+    border-bottom: 2px solid #2586ca;
 `;
 const Wrapper = styled.div`
     display: flex;
-    padding: 12.5px 0;
     justify-content: space-between;
     align-items: center;
 `;
@@ -102,13 +104,13 @@ const Bg = styled.div`
 `;
 const ToggleBgBtn = styled.div`
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 7px;
+    top: 9px;
     display: none;
     z-index: 2;
     cursor: pointer;
     & svg {
-        fill: white;
+        fill: #2586ca;
     }
     &.active {
         position: fixed;
@@ -177,7 +179,7 @@ const NavGroup = styled.div`
 const MainLink = styled(Link)`
     font-size: 22px;
     margin-right: 10px;
-    margin-bottom: 3.5px;
+    color: #064d7f;
     @media(max-width: 510px) {
         font-size: 16px;
     }
@@ -185,10 +187,40 @@ const MainLink = styled(Link)`
 const NavItem = styled(Link)`
     font-size: 15px;
     margin: 0 10px;
+    padding: 15px 0px;
+    transition: .2s;
+    &:hover {
+        color: #0089ff;
+    }
+    &.active {
+        position: relative;
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-top: 0 solid white;
+            border-right: 10px solid white;
+            border-bottom: 10px solid #2586ca;
+            border-left: 10px solid white;
+        }
+        // border-top-left-radius: 30px;
+        // border-bottom-right-radius: 30px;
+        // background-color: #0089ff;
+        color: #0089ff;
+    }
     @media(max-width: 910px) {
         &.nav-link-item {
             font-size: 11px;
             margin: 0 6px;
+        }
+    }
+    @media(max-width: 510px) {
+        padding: 15px 7px;
+        &.nav-link-item {
+            margin: 0;
         }
     }
 `;
@@ -199,14 +231,15 @@ const LogoutBtn = styled.button`
     padding: 7.5px 10px;
     background-color: white;
     border: 1px solid #dfdfdf;
+    border-radius: 3px;
     font-size: 12px;
     cursor: pointer;
     margin-left: 10px;
     transition: .3s;
     &:hover {
-        background-color: black;
+        background-color: #0089ff;
         color: white;
-        border: 1px solid black;
+        border: 1px solid #0089ff;
     }
 `;
 

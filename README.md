@@ -23,6 +23,7 @@
 - [x] PublicChatRoom - GetUserList(show users profile)
 - [x] EmailSignUp - Photo Add
 - [x] PublicChatRoom - Mobile UI
+- [x] Navbar - Design
 - [] My Page - UpdateMyProfile
 
 
