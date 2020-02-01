@@ -175,13 +175,13 @@ const FormMyProfile: React.FC<IProps> = ({
                  *  1. formPhoto !== photo일 경우:
                  *   - 현재의 photo와 다른 photo라면,
                  *   - 포토가 업데이트 되어야 될 경우만, 실행시키도록 한다. 
-                 *  2. 기존의 photo가 있지만, 업데이트 될 새로운 formPhoto !== ""인 경우:
+                 *  2. 기존의 photo가 있지만, 업데이트 될 새로운 formPhoto === ""인 경우:
                  *   - ""로 넣어주어 서버에서 제거될 수 있도록 한다.
                  */
                 if(formPhoto && uploadedFile && formPhoto !== photo) {
                     // [1]
                     updatedPhoto = await onUploadCloudinary(uploadedFile);
-                } else if(updatedPhoto === null && photo !== null){
+                } else if(formPhoto === "" && photo !== null){
                     // [2]
                     updatedPhoto = ""
                 }
