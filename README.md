@@ -26,7 +26,6 @@
 - [x] Navbar - Design
 - [x] My Page - UpdateMyProfile
 
-
 ## Todo <예정사항>
 - [] Post 자세히 보기.
 - [] Post 분류(최신/기부금액)

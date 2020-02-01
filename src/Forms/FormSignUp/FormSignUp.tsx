@@ -57,7 +57,7 @@ const useFetch = () => {
     });
 
     const [signUp] = useMutation<emailSignUp, emailSignUpVariables>(EMAIL_SIGN_UP, {
-        refetchQueries: GET_USER_LIST, // 로그인 후 유저리스틀 캐시가 아닌 서버에서 쿼리를 재요청하여 가져올수있도록 한다.
+        refetchQueries: [{query: GET_USER_LIST }], // 로그인 후 유저리스틀 캐시가 아닌 서버에서 쿼리를 재요청하여 가져올수있도록 한다.
         onCompleted: data => {
             if(progress) {
                 const { EmailSignUp: { ok, error= "Failed", token }} = data;
