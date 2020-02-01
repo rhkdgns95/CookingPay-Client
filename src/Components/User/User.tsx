@@ -13,9 +13,9 @@ const UserContext: React.Context<IContext> = createContext<IContext>(InitContext
 
 const useUserContext = () => useContext(UserContext);
 
-const useFetch = (): { value: IContext } => {
+const useFetch = (isLoggedIn: boolean): { value: IContext } => {
     const { data, loading } = useQuery<getMyProfile, void>(GET_MY_PROFILE, {
-        fetchPolicy: "network-only",
+        fetchPolicy: "cache-and-network", 
         onCompleted: data => {
             // console.log("GetMyProfile onCompleted: ", data);
         },
@@ -35,9 +35,10 @@ const useFetch = (): { value: IContext } => {
 };
 
 const UserProvider: React.FC<any> = ({
-    children
+    children,
+    isLoggedIn
 }) => (
-    <UserContext.Provider { ...useFetch() }>
+    <UserContext.Provider { ...useFetch(isLoggedIn) }>
         {
             children
         }

@@ -27,6 +27,9 @@ const AppMessage = () => {
             }
         }
     }, [messages]);
+    useEffect(() => {
+
+    }, [])
     return (
         <Container onLoad={e => console.log("E2: ", e)}>
             <Wrapper>

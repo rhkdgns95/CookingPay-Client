@@ -313,7 +313,7 @@ const PublicChatRoom: React.FC<IProps> = ({
                             </ChatScreen>
                             <ChatInputForm onSubmit={handleSendPublicMessage}>
                                 <InputChat  value={formText.value} onChange={formText.onChange} placeholder={user ? "메시지를 입력해주세요" : "로그인 유저만 이용 가능합니다."} disabled={!user || progress}/>
-                                { user &&  <InputChatSubmit type={"submit"} value={"Send"} disabled={!user || progress}/> }
+                                { user &&  <InputChatSubmit className={formText.value !== "" ? "active" : ""} type={"submit"} value={"Send"} disabled={!user || progress}/> }
                             </ChatInputForm>
                         </ContentMessage>
                         <ContentMyProfile
@@ -641,14 +641,19 @@ const InputChatSubmit = styled.input`
     font-size: 13px;
     height: 90%;
     letter-spacing: .5px;
-    background-color: #eea52b;
     color: white;
     border-radius: 6px;
     font-size: 11px;
     height: 70%;
     cursor: pointer;
     transition: .2s;
-    
+
+    background-color: #eea52b;
+    opacity: .8;
+    &.active {
+        opacity: 1;
+        // background-color: #ec7800;
+    }
     &:foucs,
     &:active {
         outline: none;
@@ -710,7 +715,7 @@ const MobileMenuButton = styled.div`
     & svg {
         width: 30px;
         height: 30px;
-        opacity: .3;
+        opacity: .2;
         transition: .2s;
     }
     &:not(.active) {

@@ -24,7 +24,7 @@
 - [x] EmailSignUp - Photo Add
 - [x] PublicChatRoom - Mobile UI
 - [x] Navbar - Design
-- [] My Page - UpdateMyProfile
+- [x] My Page - UpdateMyProfile
 
 
 ## Todo <예정사항>

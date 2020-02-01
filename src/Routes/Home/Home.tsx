@@ -15,7 +15,7 @@ const HomePresenter = () => {
     const { user } = useUserContext();
     return (
         <Container>
-            <NavBar name={user?.name || ""}/>
+            <NavBar />
             <Wrapper>
                 <Row className={"row"}>
                    <PublicChatRoom   

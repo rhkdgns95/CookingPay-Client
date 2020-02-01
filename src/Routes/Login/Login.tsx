@@ -41,6 +41,7 @@ const useFetch = () => {
             const { EmailSignIn: { ok, error, token }} = data;
             if(progress) {
                 setTimeout(() => {
+                    handleProgress(false);
                     if(ok && token) {
                         handleMessages({
                             ok,
@@ -58,7 +59,6 @@ const useFetch = () => {
                             text: error
                         });
                     }    
-                    handleProgress(false);
                 }, progressTimeOut);
             }
         },
@@ -92,9 +92,11 @@ const useFetch = () => {
             }
         }
     }
+
     const toggleForm = () => {
         setIsForm(!isForm);
     }
+
     return {
         loadingLogin,
         inputEmail,

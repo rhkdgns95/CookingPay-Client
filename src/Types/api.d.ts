@@ -167,6 +167,30 @@ export interface emailSignInVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateMyProfile
+// ====================================================
+
+export interface updateMyProfile_UpdateMyProfile {
+  __typename: "UpdateMyProfileResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateMyProfile {
+  UpdateMyProfile: updateMyProfile_UpdateMyProfile;
+}
+
+export interface updateMyProfileVariables {
+  name?: string | null;
+  password?: string | null;
+  photo?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getAllPost
 // ====================================================
 

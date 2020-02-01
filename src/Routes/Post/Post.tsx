@@ -16,11 +16,10 @@ const Post = () => (
 );
 
 const PostPresenter = () => {
-    const { user } = useUserContext();
     const { posts, tab, onChangeTab } = usePostContext();
     return (
         <Container>
-            <NavBar name={user?.name} menu={"post"}/>
+            <NavBar menu={"post"}/>
             <TopTitle title={"POST"} tabs={
                 <>
                     <TabItem active={tab === 0} text={"View"} value={0} onChangeTab={onChangeTab}/>

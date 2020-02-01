@@ -160,6 +160,7 @@ const FormSignUp = () => {
             return true;
         }
     }
+    
     /**
      *  handleCancelUploaded: 
      *  업로드 Input과 Photo들을 초기화.

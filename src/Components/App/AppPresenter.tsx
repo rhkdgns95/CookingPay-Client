@@ -10,12 +10,14 @@ import { IS_LOGGED_IN } from "../../Routes/Login/LoginQueries.local";
 import User from "../User";
 import Post from "../../Routes/Post";
 import SignUp from "../../Routes/SignUp";
+import MyPage from "../../Routes/MyPage";
 
 export const CloudinaryName: string = "dljwleqvc";
 export const CloudinaryType: string = "image";
 export const CloudinaryApiKey: string = "347663746347357";
 export const CloudinaryPreset: string = "hreon3pm";
 export const CloudinaryURL: string = `https://api.cloudinary.com/v1_1/${CloudinaryName}/${CloudinaryType}/upload`;
+export const CloudinaryDestroyURL: string = `https://api.cloudinary.com/v1_1/${CloudinaryName}/${CloudinaryType}/destroy`;
 
 const App = ({
   data: {auth: { isLoggedIn }}
@@ -33,7 +35,7 @@ const AppPresenter: React.FC<{isLoggedIn: boolean}> = ({isLoggedIn}) => {
   console.log("isLogged in ?  : ", isLoggedIn)
   return (
     <BrowserRouter>
-        { isLoggedIn ? <User><LoggedIn/></User>: <LoggedOut/> }
+        { isLoggedIn ? <User isLoggedIn={isLoggedIn}><LoggedIn/></User>: <LoggedOut/> }
     </BrowserRouter>
   );
 };
@@ -42,6 +44,7 @@ const LoggedIn = () => (
     <Switch>
       <Route path={"/"} component={Home} exact />
       <Route path={"/post"} component={Post} />
+      <Route path={"/my-page"} component={MyPage} />
       <Redirect to={"/"} from={"*"} />
     </Switch>
 );
