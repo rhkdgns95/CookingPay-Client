@@ -9,6 +9,8 @@ import { SubscribeToMoreOptions } from "apollo-boost";
 import { useAppContext } from "../App/AppProvider";
 import ChatProfile from "../ChatProfile";
 import UserProfile from "../UserProfile";
+import ModalUserProfile from "../../Modals/ModalUserProfile";
+import { UserInfo } from "os";
 
 const useInput = (): IUseTextArea => {
     const [value, setValue] = useState<string>("");
@@ -37,8 +39,9 @@ const useFetch = (user: ItemUser | null) => {
     const chatScreenRef = useRef<any>({}); // 채팅 스크린의 높이 파악
     const chatScrollRef = useRef<any>({}); // 채팅 스크린의 스크롤 이동여부 파악 (timeout에 적용하기)
     const [chatScrolled, setChatScrolled] = useState<boolean>(false); // 스타일 적용할 스크롤 이벤트 
-    const [chatMenu, setChatMenu] = useState<IChatMenu>("USERS");
-
+    const [chatMenu, setChatMenu] = useState<IChatMenu>("USERS"); // 모바일 채팅 유형 선택
+    const [detailUser, setDetailUser] = useState<ItemUser | null>(null); // 유저 상세 프로필
+    
     const { data: dataUserList } = useQuery<getUserList, any>(GET_USER_LIST, {
         onCompleted: data => {
             // console.log("GetUserList onCompleted: ", data);
@@ -234,6 +237,14 @@ const useFetch = (user: ItemUser | null) => {
         setChatMenu(newChatMenu);
     }
 
+    const onChangeDetailUser = (newDetailUser: ItemUser) => {
+        setDetailUser(newDetailUser);
+    }
+
+    const onInitDetailUser = () => {
+        setDetailUser(null);
+    }
+
     const userList: Array<getUserList_GetUserList_users | null> | null = dataUserList?.GetUserList.users || null;
     const publicMessages: Array<getPublicMessage_GetPublicMessage_publicMessages | null> | null = dataPublicMessage?.GetPublicMessage.publicMessages || null;
 
@@ -247,6 +258,9 @@ const useFetch = (user: ItemUser | null) => {
         chatScrolled,
         chatMenu,
         handleChatMenu,
+        detailUser,
+        onChangeDetailUser,
+        onInitDetailUser
     };
 };
 
@@ -260,10 +274,10 @@ const PublicChatRoom: React.FC<IProps> = ({
     user
 }) => {
     const { progress } = useAppContext();
-    const { userList, chatMenu, handleChatMenu, chatScreenRef, publicMessages, handleSendPublicMessage, formText, handleChatScroll, chatScrolled } = useFetch(user);
+    const { userList, chatMenu, handleChatMenu, chatScreenRef, publicMessages, handleSendPublicMessage, formText, handleChatScroll, chatScrolled, detailUser, onChangeDetailUser, onInitDetailUser } = useFetch(user);
     const mobileRoomTop: number = chatMenu === "USERS" ? 0 : 50;
     const mobileRoomHeight: number = 200;
-
+    
     return (
         <Container>
             <Wrapper>
@@ -294,7 +308,7 @@ const PublicChatRoom: React.FC<IProps> = ({
                             <UserList>
                             {
                                 userList ? userList?.map((user, key) => 
-                                    <UserProfile key={key} email={user!.email} name={user!.name} photo={user?.photo || null}/>
+                                    <UserProfile key={key} email={user!.email} name={user!.name} photo={user?.photo || null} onClick={() => onChangeDetailUser(user as any)} />
                                 ) :
                                 <NoUsers>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M17.997 18h-11.995l-.002-.623c0-1.259.1-1.986 1.588-2.33 1.684-.389 3.344-.736 2.545-2.209-2.366-4.363-.674-6.838 1.866-6.838 2.491 0 4.226 2.383 1.866 6.839-.775 1.464.826 1.812 2.545 2.209 1.49.344 1.589 1.072 1.589 2.333l-.002.619zm4.811-2.214c-1.29-.298-2.49-.559-1.909-1.657 1.769-3.342.469-5.129-1.4-5.129-1.265 0-2.248.817-2.248 2.324 0 3.903 2.268 1.77 2.246 6.676h4.501l.002-.463c0-.946-.074-1.493-1.192-1.751zm-22.806 2.214h4.501c-.021-4.906 2.246-2.772 2.246-6.676 0-1.507-.983-2.324-2.248-2.324-1.869 0-3.169 1.787-1.399 5.129.581 1.099-.619 1.359-1.909 1.657-1.119.258-1.193.805-1.193 1.751l.002.463z"/></svg>
@@ -318,7 +332,6 @@ const PublicChatRoom: React.FC<IProps> = ({
                         </ContentMessage>
                         <ContentMyProfile
                             photo={user?.photo || null}
-
                         >
                             <ChatProfile
                                 photo={user?.photo || null}
@@ -328,6 +341,7 @@ const PublicChatRoom: React.FC<IProps> = ({
                     </RoomContent>
                 </Room>
             </Wrapper>
+            { detailUser && <ModalUserProfile toggleClick={onInitDetailUser} userName={detailUser.name} userPhoto={detailUser.photo} userEmail={detailUser.email}/> }
         </Container>
     );
 };
@@ -350,6 +364,7 @@ const Wrapper = styled.div`
                 border-right: 1px solid #dfdfdf;
                 max-width: 70px;
                 border-bottom: 0;
+                border-left: 3px solid #2196f3;
                 .room-header-title {
                     display: none;
                 }
@@ -602,7 +617,7 @@ const ChatScreen = styled.div`
         cursor: pointer;
     }
     @media(max-width: 910px) {
-        max-height: 460px;
+        height: 460px;
     }
 `;
 const ChatInputForm = styled.form`

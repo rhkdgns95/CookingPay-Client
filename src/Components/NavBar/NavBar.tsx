@@ -24,7 +24,7 @@ const useFetch = () => {
     };
 }
 const ClosePath = () => <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/></svg>;
-const OpenPath = () => <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>;
+const OpenPath = () => <svg fill={"#767676"} xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg>;
 const NavBar: React.FC<IProps> = ({
     // name,
     toggleLogin,
@@ -34,11 +34,12 @@ const NavBar: React.FC<IProps> = ({
     const { logoutMutation } = useFetch();
     const [ isBar, setIsBar ] = useState<boolean>(false);
     
-    const name: string | null = user?.name || null;
     const toggleBar = () => {
         setIsBar(!isBar);
     }
     
+    const TmpPhoto = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z"/></svg>;
+
     return (
         <Container>
             <Bg className={`${isBar ? "active" : ""}`} onClick={toggleBar}/>
@@ -57,8 +58,11 @@ const NavBar: React.FC<IProps> = ({
                     {/* <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"><path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/></svg> */}
                 </ToggleBgBtn>
                 <NavGroup className={`nav-menu-group ${isBar ? "active" : ""}`}>
-                    { name ? <>
-                                <Name>{ name }</Name>
+                    { user ? <>
+                                <Photo url={ user.photo }> 
+                                    { !user.photo && <TmpPhoto />}
+                                </Photo>
+                                <Name>{ user.name }</Name>
                                 <NavItem to={"/my-page"}>MyPage</NavItem>
                                 <LogoutBtn onClick={e => logoutMutation()}>Logout</LogoutBtn>
                             </> :
@@ -112,7 +116,7 @@ const ToggleBgBtn = styled.div`
     z-index: 2;
     cursor: pointer;
     & svg {
-        fill: #2586ca;
+        fill: #767676;
     }
     &.active {
         position: fixed;
@@ -154,6 +158,7 @@ const NavGroup = styled.div`
             transition: .2s;
             a {
                 background-color: #213767;
+                color: white;
                 &:hover {
                     background-color: black;
                 }
@@ -163,7 +168,7 @@ const NavGroup = styled.div`
                 margin: 10px 0;
                 padding: 7.5px 18px;
                 font-size: 13px;
-                border-radius: 4px;
+                border-radius: 2px;
                 &:last-child {
                     margin-top: auto;
                     background-color: black;
@@ -223,6 +228,37 @@ const NavItem = styled(Link)`
         padding: 15px 7px;
         &.nav-link-item {
             margin: 0;
+        }
+    }
+`;
+interface IPhoto {
+    url: string | null;
+}
+
+const Photo = styled.div<IPhoto>`
+    width: 100%;
+    border-radius: 50%;
+    border: 1px solid #585858;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+    & svg {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        padding: 1px;
+    }
+    background-size: cover;
+    background-position: center;
+    ${props => props.url ? `background-image: url("${props.url}");` : ``}
+    @media(max-width: 910px) {
+        & {
+            width: 100px;
+            height: 100px;
+            border-radius: 50% !important;
         }
     }
 `;

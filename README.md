@@ -25,7 +25,7 @@
 - [x] PublicChatRoom - Mobile UI
 - [x] Navbar - Design
 - [x] My Page - UpdateMyProfile
-
+- [x] My Page - ModalUserProfile(user details)
 ## Todo <예정사항>
 - [] Post 자세히 보기.
 - [] Post 분류(최신/기부금액)
