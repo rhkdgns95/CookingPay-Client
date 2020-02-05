@@ -9,6 +9,7 @@ interface ITheme {
 interface IAppMessage {
     ok: boolean;
     text: string | null;
+    createdAt?: string;
 }
 
 interface IUseInputText {

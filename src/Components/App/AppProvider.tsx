@@ -30,30 +30,42 @@ const useFetch = (): { value: IContext } => {
     const [addedMessage, setAddedMessage] = useState<boolean>(false);
 
     const handleProgress = (data: boolean) => {
+        console.log("handleProgress: ", data );
+        // setProgress((prevProgress) => {
+        //     if(prevProgress !== data) {
+        //         return data;
+        //     }
+        //     return prevProgress;
+        // })
         setProgress(data);
     };
 
     const handleMessages = (data: IAppMessage) => {
         const { ok, text } = data;
         const length = messages.length;
+        const createdAt: string = `id_${Date.now()}`;
+
         const newMessage: IAppMessage = {
             ok,
-            text
+            text,
+            createdAt
         };
         setAddedMessage(true);
+        
         setMessages([ 
             ...messages,
             newMessage
         ]);
+
         setTimeout(() => {
             setAddedMessage(false);
             setMessages(prevMessages => {
-                const newMessages = prevMessages.filter((item) => item !== newMessage);
-                return newMessages
+                const deletedMessages = prevMessages.filter(item => item.createdAt !== createdAt);
+                // const newMessages = prevMessages.filter((item) => item !== newMessage);
+                return deletedMessages
             });
         }, messageTimeOut);
     };
-    
     
 
     return {

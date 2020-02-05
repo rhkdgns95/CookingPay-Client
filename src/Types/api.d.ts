@@ -143,6 +143,29 @@ export interface getMyProfile {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: findEmail
+// ====================================================
+
+export interface findEmail_FindEmail {
+  __typename: "FindEmailResponse";
+  ok: boolean;
+  error: string | null;
+  email: string | null;
+}
+
+export interface findEmail {
+  FindEmail: findEmail_FindEmail;
+}
+
+export interface findEmailVariables {
+  name: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: emailSignIn
 // ====================================================
 

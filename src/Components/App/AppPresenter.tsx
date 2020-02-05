@@ -11,6 +11,7 @@ import User from "../User";
 import Post from "../../Routes/Post";
 import SignUp from "../../Routes/SignUp";
 import MyPage from "../../Routes/MyPage";
+import FindAccount from "../../Routes/FindAccount";
 
 export const CloudinaryName: string = "dljwleqvc";
 export const CloudinaryType: string = "image";
@@ -52,6 +53,7 @@ const LoggedIn = () => (
 const LoggedOut = () => (
   <Switch>
     <Route path={"/"} component={Login} exact/>
+    <Route path={"/find-account"} component={FindAccount} />
     <Route path={"/signup"} component={SignUp} />
     <Redirect to={"/"} from={"*"} />
   </Switch>

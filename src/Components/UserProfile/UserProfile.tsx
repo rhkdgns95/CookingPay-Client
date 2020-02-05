@@ -33,6 +33,7 @@ const Container = styled.div`
     position: relative;
     padding: 8px 0;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     &:not(:first-child) {
         &::after {
             content: "";
