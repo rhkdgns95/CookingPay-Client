@@ -30,7 +30,6 @@ const useFetch = (): { value: IContext } => {
     const [addedMessage, setAddedMessage] = useState<boolean>(false);
 
     const handleProgress = (data: boolean) => {
-        console.log("handleProgress: ", data );
         // setProgress((prevProgress) => {
         //     if(prevProgress !== data) {
         //         return data;

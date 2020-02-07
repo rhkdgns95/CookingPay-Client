@@ -152,6 +152,10 @@ const Photo = styled.div`
     width: 100%;
     max-width: 200px;
     margin: 10px auto;
+    box-shadow: 0 2px 4px rgba(0,50,250,.22);
+    border: 1px solid #2eb88f;
+    padding: 10px;
+    border-radius: 3px;
     & svg {
         position: absolute;
         padding: 5px;
@@ -161,7 +165,7 @@ const Photo = styled.div`
         border-radius: 50%;
         cursor: pointer;
         fill: white;
-        background-color: #d08282;
+        background-color: #ff6f6b;
     }
     @media(max-width: 510px) {
         width: 44%;
@@ -169,7 +173,9 @@ const Photo = styled.div`
 `;
 const Img = styled.img`
     display: block;
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
 `;
 const Input = styled.input`
     position: absolute;

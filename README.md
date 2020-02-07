@@ -27,6 +27,7 @@
 - [x] My Page - UpdateMyProfile
 - [x] ModalUserProfile(user details)
 - [x] FindAccount - email
+- [x] Post - UploadedPhoto Design
 - [] FindAccount - password
 
 
